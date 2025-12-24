@@ -165,6 +165,8 @@
 
 .eb-ios .eb-main-border.eb-static {
     border-width: 3px;
+    margin: 0;
+    inset: 0;
     box-shadow:
         0 0 8px var(--electric-border-color),
         0 0 16px oklch(from var(--electric-border-color) l c h / 0.5);
