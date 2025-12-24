@@ -25,7 +25,7 @@ const HeroSection = () => {
                     <p className="tagline">Welcome to My personal website</p>
                 </div>
                 <div className="hero-image">
-                    <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.4} circular={true}>
+                    <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.3} circular={true}>
                         <div className="profile-circle">
                             <img src={profileImg} alt="Kittipop Sanpho" />
                         </div>

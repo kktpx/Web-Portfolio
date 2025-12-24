@@ -1,31 +1,155 @@
-.electric-border {
+/* CSS Variables */
+.eb-container {
+    --electric-border-color: #5227FF;
     --electric-light-color: oklch(from var(--electric-border-color) l c h);
+    --gradient-color: oklch(from var(--electric-border-color) 0.3 calc(c / 2) h / 0.4);
     --eb-border-width: 2px;
     position: relative;
     border-radius: inherit;
-    overflow: visible;
-    isolation: isolate;
 }
 
 /* Circular mode */
 .eb-circular,
-.eb-circular .eb-content,
-.eb-circular .eb-layers,
-.eb-circular .eb-stroke,
-.eb-circular .eb-glow-1,
-.eb-circular .eb-glow-2,
-.eb-circular .eb-background-glow {
+.eb-circular .eb-inner-container,
+.eb-circular .eb-border-outer,
+.eb-circular .eb-main-border,
+.eb-circular .eb-glow-layer-1,
+.eb-circular .eb-glow-layer-2,
+.eb-circular .eb-overlay-1,
+.eb-circular .eb-overlay-2,
+.eb-circular .eb-background-glow,
+.eb-circular .eb-content {
     border-radius: 50%;
 }
 
-/* SVG hidden but accessible for filter */
-.eb-svg {
-    position: fixed;
-    left: -10000px;
-    top: -10000px;
-    width: 10px;
-    height: 10px;
-    opacity: 0.001;
+/* SVG positioning */
+.eb-svg-container {
+    position: absolute;
+}
+
+/* Inner container - extends outward and in front */
+.eb-inner-container {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Border outer - semi-transparent outer ring */
+.eb-border-outer {
+    position: absolute;
+    inset: 0;
+    border: 1px solid oklch(from var(--electric-border-color) l c h / 0.5);
+    border-radius: inherit;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+}
+
+/* Main border - with SVG filter applied */
+.eb-main-border {
+    position: absolute;
+    inset: 0;
+    border: var(--eb-border-width) solid var(--electric-border-color);
+    border-radius: inherit;
+    margin-top: -4px;
+    margin-left: -4px;
+    box-sizing: border-box;
+}
+
+/* Glow layer 1 */
+.eb-glow-layer-1 {
+    border: 1px solid oklch(from var(--electric-border-color) l c h / 0.6);
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(1px);
+    box-sizing: border-box;
+}
+
+/* Glow layer 2 */
+.eb-glow-layer-2 {
+    border: 1px solid var(--electric-light-color);
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(4px);
+    box-sizing: border-box;
+}
+
+/* Overlay 1 */
+.eb-overlay-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 1;
+    mix-blend-mode: overlay;
+    transform: scale(1.1);
+    filter: blur(16px);
+    background: linear-gradient(-30deg,
+            white,
+            transparent 30%,
+            transparent 70%,
+            white);
+    pointer-events: none;
+}
+
+/* Overlay 2 */
+.eb-overlay-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    transform: scale(1.1);
+    filter: blur(16px);
+    background: linear-gradient(-30deg,
+            white,
+            transparent 30%,
+            transparent 70%,
+            white);
+    pointer-events: none;
+}
+
+/* Background glow */
+.eb-background-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    filter: blur(32px);
+    transform: scale(1.1);
+    opacity: 0.3;
+    z-index: -1;
+    background: linear-gradient(-30deg,
+            var(--electric-light-color),
+            transparent,
+            var(--electric-border-color));
     pointer-events: none;
 }
 
@@ -36,128 +160,39 @@
     z-index: 1;
 }
 
-/* Layers container */
-.eb-layers {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* Base styles for effect layers */
-.eb-stroke,
-.eb-glow-1,
-.eb-glow-2,
-.eb-background-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    box-sizing: border-box;
-}
-
-/* Main stroke - SVG filter applied here */
-.eb-stroke {
-    border: var(--eb-border-width) solid var(--electric-border-color);
-}
-
-/* Glow 1 - soft blur */
-.eb-glow-1 {
-    border: var(--eb-border-width) solid oklch(from var(--electric-border-color) l c h / 0.6);
-    opacity: 0.5;
-    filter: blur(calc(0.5px + (var(--eb-border-width) * 0.25)));
-}
-
-/* Glow 2 - larger blur */
-.eb-glow-2 {
-    border: var(--eb-border-width) solid var(--electric-light-color);
-    opacity: 0.5;
-    filter: blur(calc(2px + (var(--eb-border-width) * 0.5)));
-}
-
-/* Background glow */
-.eb-background-glow {
-    z-index: -1;
-    transform: scale(1.08);
-    filter: blur(32px);
-    opacity: 0.3;
-    background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));
-}
-
 /* ==================== MOBILE STYLES ==================== */
-/* On mobile, use CSS animations instead of SVG filter */
-
-.eb-mobile .eb-stroke {
-    filter: none !important;
+.eb-mobile .eb-main-border {
     animation: eb-mobile-flicker 0.15s ease-in-out infinite alternate;
 }
 
-.eb-mobile .eb-glow-1 {
+.eb-mobile .eb-glow-layer-1 {
     animation: eb-mobile-pulse 1.5s ease-in-out infinite alternate;
 }
 
-.eb-mobile .eb-glow-2 {
+.eb-mobile .eb-glow-layer-2 {
     animation: eb-mobile-pulse 2s ease-in-out infinite alternate-reverse;
 }
 
-.eb-mobile .eb-background-glow {
-    animation: eb-mobile-breathe 3s ease-in-out infinite alternate;
-}
-
-/* Mobile animations - simulate electric flicker */
 @keyframes eb-mobile-flicker {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
 
-    20% {
-        opacity: 0.9;
-        transform: scale(1.002);
-    }
-
-    40% {
-        opacity: 1;
-        transform: scale(0.998);
-    }
-
-    60% {
-        opacity: 0.85;
-        transform: scale(1.001);
-    }
-
-    80% {
-        opacity: 0.95;
-        transform: scale(0.999);
-    }
-
+    0%,
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.85;
+        transform: scale(1.002);
     }
 }
 
 @keyframes eb-mobile-pulse {
     0% {
         opacity: 0.3;
-        transform: scale(1);
     }
 
     100% {
         opacity: 0.6;
-        transform: scale(1.01);
-    }
-}
-
-@keyframes eb-mobile-breathe {
-    0% {
-        opacity: 0.2;
-        transform: scale(1.05);
-    }
-
-    100% {
-        opacity: 0.4;
-        transform: scale(1.1);
     }
 }

@@ -13,7 +13,6 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     const filterId = `turbulent-displace-${rawId}`;
     const svgRef = useRef(null);
     const rootRef = useRef(null);
-    const strokeRef = useRef(null);
 
     useEffect(() => {
         setMobile(isMobile());
@@ -25,10 +24,6 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
         const svg = svgRef.current;
         const host = rootRef.current;
         if (!svg || !host) return;
-
-        if (strokeRef.current) {
-            strokeRef.current.style.filter = `url(#${filterId})`;
-        }
 
         const width = Math.max(1, Math.round(host.clientWidth || host.getBoundingClientRect().width || 0));
         const height = Math.max(1, Math.round(host.clientHeight || host.getBoundingClientRect().height || 0));
@@ -86,13 +81,13 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
         '--eb-border-width': `${thickness}px`,
     };
 
-    const classes = ['electric-border', circular ? 'eb-circular' : '', mobile ? 'eb-mobile' : '', className].filter(Boolean).join(' ');
+    const classes = ['eb-container', circular ? 'eb-circular' : '', mobile ? 'eb-mobile' : '', className].filter(Boolean).join(' ');
 
     return (
         <div ref={rootRef} className={classes} style={{ ...vars, ...style }}>
-            {/* SVG Filter - only on desktop */}
+            {/* SVG Filter */}
             {!mobile && (
-                <svg ref={svgRef} className="eb-svg" aria-hidden focusable="false">
+                <svg ref={svgRef} className="eb-svg-container" aria-hidden focusable="false">
                     <defs>
                         <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
                             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
@@ -124,13 +119,19 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
                 </svg>
             )}
 
-            {/* Glow layers */}
-            <div className="eb-layers">
-                <div ref={strokeRef} className="eb-stroke" />
-                <div className="eb-glow-1" />
-                <div className="eb-glow-2" />
-                <div className="eb-background-glow" />
+            {/* Inner container with border layers */}
+            <div className="eb-inner-container">
+                <div className="eb-border-outer">
+                    <div className="eb-main-border" style={{ filter: mobile ? 'none' : `url(#${filterId})` }} />
+                </div>
+                <div className="eb-glow-layer-1" />
+                <div className="eb-glow-layer-2" />
             </div>
+
+            {/* Overlay effects */}
+            <div className="eb-overlay-1" />
+            <div className="eb-overlay-2" />
+            <div className="eb-background-glow" />
 
             {/* Content */}
             <div className="eb-content">{children}</div>

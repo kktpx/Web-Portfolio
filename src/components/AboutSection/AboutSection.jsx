@@ -14,7 +14,7 @@ const AboutSection = () => {
                 </div>
                 <div className="about-content">
                     <div className="about-image-container">
-                        <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.4} circular={true}>
+                        <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.3} circular={true}>
                             <div className="about-profile-circle">
                                 <img src={profileImg} alt="Kittipop Sanpho" />
                             </div>
