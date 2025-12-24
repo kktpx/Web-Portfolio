@@ -119,7 +119,7 @@ const ContactSection = () => {
                                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon-link">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
                                 </a>
-                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
                                 </a>
                             </div>

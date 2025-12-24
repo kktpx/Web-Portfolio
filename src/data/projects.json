@@ -3,16 +3,16 @@
         "id": 1,
         "title": "Website Portfolio",
         "description": "My personal website, I created this website to display my profile, skills and projects. As well as my place to try new technology.",
-        "image": "../../../public/images/WebPort.jpg",
-        "liveUrl": "#",
-        "githubUrl": "#"
+        "image": "/images/WebPort.jpg",
+        "liveUrl": "https://ktp-jade.vercel.app/",
+        "githubUrl": "https://github.com/kktpx/Web-Portfolio"
     },
     {
         "id": 2,
         "title": "20 Shop",
         "description": "A mini-project developed for a university course. This web application simulates a football jersey store to demonstrate web development fundamentals.",
-        "image": "../../../public/images/20Shop.jpg",
-        "liveUrl": "#",
-        "githubUrl": "#"
+        "image": "/images/20Shop.jpg",
+        "liveUrl": "https://20shop.vercel.app/",
+        "githubUrl": "https://github.com/kktpx/20-shop"
     }
 ]
