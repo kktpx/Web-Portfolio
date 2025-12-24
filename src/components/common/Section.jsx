@@ -3,8 +3,8 @@ import './Section.css';
 
 const Section = ({ id, className = '', isFirst = false, hasGap = true, children }) => {
     const sectionRef = useRef(null);
-    // All sections visible immediately to prevent blank pages on slow mobile
-    const [isVisible, setIsVisible] = useState(true);
+    // First section visible immediately, others animate on scroll
+    const [isVisible, setIsVisible] = useState(isFirst);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
