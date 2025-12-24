@@ -3,7 +3,7 @@ import Section from '../common/Section';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import TextType from '../TextType/TextType';
 import './HeroSection.css';
-import profileImg from '../../../public/images/profile.jpg'
+import profileImg from '../../../public/images/profile.webp'
 
 const HeroSection = () => {
     return (
@@ -27,7 +27,7 @@ const HeroSection = () => {
                 <div className="hero-image">
                     <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.4} circular={true}>
                         <div className="profile-circle">
-                           <img src={profileImg} alt="Kittipop Sanpho" />
+                            <img src={profileImg} alt="Kittipop Sanpho" />
                         </div>
                     </ElectricBorder>
                 </div>

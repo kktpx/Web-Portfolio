@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../common/Section';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import './AboutSection.css';
-import profileImg from '../../../public/images/profile2.jpg'
+import profileImg from '../../../public/images/profile2.webp'
 
 const AboutSection = () => {
     return (
