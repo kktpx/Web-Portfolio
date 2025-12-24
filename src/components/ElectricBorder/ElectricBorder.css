@@ -7,6 +7,7 @@
     isolation: isolate;
 }
 
+/* Circular mode */
 .eb-circular,
 .eb-circular .eb-content,
 .eb-circular .eb-layers,
@@ -17,6 +18,7 @@
     border-radius: 50%;
 }
 
+/* SVG hidden but accessible for filter */
 .eb-svg {
     position: fixed;
     left: -10000px;
@@ -27,12 +29,14 @@
     pointer-events: none;
 }
 
+/* Content */
 .eb-content {
     position: relative;
     border-radius: inherit;
     z-index: 1;
 }
 
+/* Layers container */
 .eb-layers {
     position: absolute;
     inset: 0;
@@ -41,11 +45,10 @@
     z-index: 2;
 }
 
+/* Base styles for effect layers */
 .eb-stroke,
 .eb-glow-1,
 .eb-glow-2,
-.eb-overlay-1,
-.eb-overlay-2,
 .eb-background-glow {
     position: absolute;
     inset: 0;
@@ -54,26 +57,107 @@
     box-sizing: border-box;
 }
 
+/* Main stroke - SVG filter applied here */
 .eb-stroke {
     border: var(--eb-border-width) solid var(--electric-border-color);
 }
 
+/* Glow 1 - soft blur */
 .eb-glow-1 {
     border: var(--eb-border-width) solid oklch(from var(--electric-border-color) l c h / 0.6);
     opacity: 0.5;
     filter: blur(calc(0.5px + (var(--eb-border-width) * 0.25)));
 }
 
+/* Glow 2 - larger blur */
 .eb-glow-2 {
     border: var(--eb-border-width) solid var(--electric-light-color);
     opacity: 0.5;
     filter: blur(calc(2px + (var(--eb-border-width) * 0.5)));
 }
 
+/* Background glow */
 .eb-background-glow {
     z-index: -1;
     transform: scale(1.08);
     filter: blur(32px);
     opacity: 0.3;
     background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));
+}
+
+/* ==================== MOBILE STYLES ==================== */
+/* On mobile, use CSS animations instead of SVG filter */
+
+.eb-mobile .eb-stroke {
+    filter: none !important;
+    animation: eb-mobile-flicker 0.15s ease-in-out infinite alternate;
+}
+
+.eb-mobile .eb-glow-1 {
+    animation: eb-mobile-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.eb-mobile .eb-glow-2 {
+    animation: eb-mobile-pulse 2s ease-in-out infinite alternate-reverse;
+}
+
+.eb-mobile .eb-background-glow {
+    animation: eb-mobile-breathe 3s ease-in-out infinite alternate;
+}
+
+/* Mobile animations - simulate electric flicker */
+@keyframes eb-mobile-flicker {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    20% {
+        opacity: 0.9;
+        transform: scale(1.002);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(0.998);
+    }
+
+    60% {
+        opacity: 0.85;
+        transform: scale(1.001);
+    }
+
+    80% {
+        opacity: 0.95;
+        transform: scale(0.999);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes eb-mobile-pulse {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.6;
+        transform: scale(1.01);
+    }
+}
+
+@keyframes eb-mobile-breathe {
+    0% {
+        opacity: 0.2;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
 }

@@ -1,15 +1,27 @@
-import { useEffect, useId, useLayoutEffect, useRef } from 'react';
-
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import './ElectricBorder.css';
 
+// Detect mobile devices
+const isMobile = () => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+};
+
 const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thickness = 2, circular = false, className, style }) => {
+    const [mobile, setMobile] = useState(false);
     const rawId = useId().replace(/[:]/g, '');
     const filterId = `turbulent-displace-${rawId}`;
     const svgRef = useRef(null);
     const rootRef = useRef(null);
     const strokeRef = useRef(null);
 
+    useEffect(() => {
+        setMobile(isMobile());
+    }, []);
+
     const updateAnim = () => {
+        if (mobile) return;
+
         const svg = svgRef.current;
         const host = rootRef.current;
         if (!svg || !host) return;
@@ -51,76 +63,68 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
         requestAnimationFrame(() => {
             [...dyAnims, ...dxAnims].forEach(a => {
                 if (typeof a.beginElement === 'function') {
-                    try {
-                        a.beginElement();
-                    } catch {
-                        console.warn('ElectricBorder: beginElement failed, this may be due to a browser limitation.');
-                    }
+                    try { a.beginElement(); } catch { }
                 }
             });
         });
     };
 
     useEffect(() => {
-        updateAnim();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [speed, chaos]);
+        if (!mobile) updateAnim();
+    }, [speed, chaos, mobile]);
 
     useLayoutEffect(() => {
-        if (!rootRef.current) return;
+        if (mobile || !rootRef.current) return;
         const ro = new ResizeObserver(() => updateAnim());
         ro.observe(rootRef.current);
         updateAnim();
         return () => ro.disconnect();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [mobile]);
 
     const vars = {
-        ['--electric-border-color']: color,
-        ['--eb-border-width']: `${thickness}px`
+        '--electric-border-color': color,
+        '--eb-border-width': `${thickness}px`,
     };
 
-    const classes = ['electric-border', circular ? 'eb-circular' : '', className].filter(Boolean).join(' ');
+    const classes = ['electric-border', circular ? 'eb-circular' : '', mobile ? 'eb-mobile' : '', className].filter(Boolean).join(' ');
 
     return (
         <div ref={rootRef} className={classes} style={{ ...vars, ...style }}>
-            <svg ref={svgRef} className="eb-svg" aria-hidden focusable="false">
-                <defs>
-                    <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
-                        <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                            <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                        </feOffset>
+            {/* SVG Filter - only on desktop */}
+            {!mobile && (
+                <svg ref={svgRef} className="eb-svg" aria-hidden focusable="false">
+                    <defs>
+                        <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+                            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
+                            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                                <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                            </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
-                        <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                            <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                        </feOffset>
+                            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
+                            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                                <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                            </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
-                        <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
-                            <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                        </feOffset>
+                            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
+                            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
+                                <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                            </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
-                        <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
-                            <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                        </feOffset>
+                            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
+                            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
+                                <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                            </feOffset>
 
-                        <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
-                        <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
-                        <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
-                        <feDisplacementMap
-                            in="SourceGraphic"
-                            in2="combinedNoise"
-                            scale="30"
-                            xChannelSelector="R"
-                            yChannelSelector="B"
-                        />
-                    </filter>
-                </defs>
-            </svg>
+                            <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+                            <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+                            <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+                            <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
+                        </filter>
+                    </defs>
+                </svg>
+            )}
 
+            {/* Glow layers */}
             <div className="eb-layers">
                 <div ref={strokeRef} className="eb-stroke" />
                 <div className="eb-glow-1" />
@@ -128,6 +132,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
                 <div className="eb-background-glow" />
             </div>
 
+            {/* Content */}
             <div className="eb-content">{children}</div>
         </div>
     );
