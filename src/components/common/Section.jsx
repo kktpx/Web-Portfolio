@@ -3,7 +3,8 @@ import './Section.css';
 
 const Section = ({ id, className = '', isFirst = false, hasGap = true, children }) => {
     const sectionRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
+    // First section visible immediately, others wait for IntersectionObserver
+    const [isVisible, setIsVisible] = useState(isFirst);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
