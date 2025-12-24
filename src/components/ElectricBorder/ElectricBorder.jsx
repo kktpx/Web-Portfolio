@@ -1,27 +1,27 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import './ElectricBorder.css';
 
-// Detect mobile devices
-const isMobile = () => {
+// Detect iOS devices specifically
+const isIOS = () => {
     if (typeof window === 'undefined') return false;
-    return window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 };
 
 const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thickness = 2, circular = false, className, style }) => {
-    const [mobile, setMobile] = useState(false);
+    const [ios, setIos] = useState(false);
     const rawId = useId().replace(/[:]/g, '');
     const filterId = `turbulent-displace-${rawId}`;
     const svgRef = useRef(null);
     const rootRef = useRef(null);
 
     useEffect(() => {
-        setMobile(isMobile());
+        setIos(isIOS());
     }, []);
 
-    // Use lower numOctaves on mobile for better performance
-    const numOctaves = mobile ? 3 : 10;
-
     const updateAnim = () => {
+        if (ios) return;
+
         const svg = svgRef.current;
         const host = rootRef.current;
         if (!svg || !host) return;
@@ -41,15 +41,12 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
             dxAnims[1].setAttribute('values', `0; -${width}`);
         }
 
-        // Slower animation on mobile for better performance
-        const baseDur = mobile ? 8 : 6;
+        const baseDur = 6;
         const dur = Math.max(0.001, baseDur / (speed || 1));
         [...dyAnims, ...dxAnims].forEach(a => a.setAttribute('dur', `${dur}s`));
 
         const disp = svg.querySelector('feDisplacementMap');
-        // Lower displacement scale on mobile
-        const scale = mobile ? 20 : 30;
-        if (disp) disp.setAttribute('scale', String(scale * (chaos || 1)));
+        if (disp) disp.setAttribute('scale', String(30 * (chaos || 1)));
 
         const filterEl = svg.querySelector(`#${CSS.escape(filterId)}`);
         if (filterEl) {
@@ -69,46 +66,61 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     };
 
     useEffect(() => {
-        updateAnim();
-    }, [speed, chaos, mobile]);
+        if (!ios) updateAnim();
+    }, [speed, chaos, ios]);
 
     useLayoutEffect(() => {
-        if (!rootRef.current) return;
+        if (ios || !rootRef.current) return;
         const ro = new ResizeObserver(() => updateAnim());
         ro.observe(rootRef.current);
         updateAnim();
         return () => ro.disconnect();
-    }, [mobile]);
+    }, [ios]);
 
     const vars = {
         '--electric-border-color': color,
         '--eb-border-width': `${thickness}px`,
     };
 
-    const classes = ['eb-container', circular ? 'eb-circular' : '', className].filter(Boolean).join(' ');
+    const classes = ['eb-container', circular ? 'eb-circular' : '', ios ? 'eb-ios' : '', className].filter(Boolean).join(' ');
 
+    // iOS: Simple border with glow, no SVG filter
+    if (ios) {
+        return (
+            <div ref={rootRef} className={classes} style={{ ...vars, ...style }}>
+                <div className="eb-inner-container">
+                    <div className="eb-main-border eb-static" />
+                    <div className="eb-glow-layer-1" />
+                    <div className="eb-glow-layer-2" />
+                </div>
+                <div className="eb-background-glow" />
+                <div className="eb-content">{children}</div>
+            </div>
+        );
+    }
+
+    // Other devices: Full electric effect with SVG filter
     return (
         <div ref={rootRef} className={classes} style={{ ...vars, ...style }}>
-            {/* SVG Filter - always render, but with lower numOctaves on mobile */}
             <svg ref={svgRef} className="eb-svg-container" aria-hidden focusable="false">
                 <defs>
                     <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={numOctaves} result="noise1" seed="1" />
+                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
                         <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
                             <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
                         </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={numOctaves} result="noise2" seed="1" />
+                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
                         <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
                             <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
                         </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={numOctaves} result="noise1" seed="2" />
+                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
                         <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
                             <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
                         </feOffset>
 
-                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={numOctaves} result="noise2" seed="2" />
+                        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
                         <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
                             <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
                         </feOffset>
@@ -121,7 +133,6 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
                 </defs>
             </svg>
 
-            {/* Inner container with border layers */}
             <div className="eb-inner-container">
                 <div className="eb-border-outer">
                     <div className="eb-main-border" style={{ filter: `url(#${filterId})` }} />
@@ -130,12 +141,10 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
                 <div className="eb-glow-layer-2" />
             </div>
 
-            {/* Overlay effects */}
             <div className="eb-overlay-1" />
             <div className="eb-overlay-2" />
             <div className="eb-background-glow" />
 
-            {/* Content */}
             <div className="eb-content">{children}</div>
         </div>
     );

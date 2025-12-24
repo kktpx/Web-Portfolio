@@ -160,80 +160,27 @@
     z-index: 1;
 }
 
-/* ==================== MOBILE STYLES ==================== */
-/* Make electric border visible on iOS with CSS animations */
+/* ==================== iOS STYLES ==================== */
+/* Simple static border with glow for iOS devices */
 
-.eb-mobile .eb-main-border {
+.eb-ios .eb-main-border.eb-static {
     border-width: 3px;
-    animation: eb-mobile-electric 0.1s linear infinite;
     box-shadow:
-        0 0 5px var(--electric-border-color),
-        0 0 10px var(--electric-border-color),
-        inset 0 0 5px oklch(from var(--electric-border-color) l c h / 0.3);
+        0 0 8px var(--electric-border-color),
+        0 0 16px oklch(from var(--electric-border-color) l c h / 0.5);
 }
 
-.eb-mobile .eb-glow-layer-1 {
+.eb-ios .eb-glow-layer-1 {
     border-width: 2px;
-    opacity: 0.8;
-    animation: eb-mobile-pulse 1s ease-in-out infinite alternate;
+    opacity: 0.7;
 }
 
-.eb-mobile .eb-glow-layer-2 {
+.eb-ios .eb-glow-layer-2 {
     border-width: 2px;
-    opacity: 0.6;
-    filter: blur(6px);
-    animation: eb-mobile-pulse 1.5s ease-in-out infinite alternate-reverse;
-}
-
-.eb-mobile .eb-background-glow {
     opacity: 0.5;
-    animation: eb-mobile-glow 2s ease-in-out infinite alternate;
+    filter: blur(8px);
 }
 
-@keyframes eb-mobile-electric {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    25% {
-        opacity: 0.9;
-        transform: scale(1.003);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(0.997);
-    }
-
-    75% {
-        opacity: 0.85;
-        transform: scale(1.002);
-    }
-}
-
-@keyframes eb-mobile-pulse {
-    0% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0.9;
-        transform: scale(1.01);
-    }
-}
-
-@keyframes eb-mobile-glow {
-    0% {
-        opacity: 0.3;
-        transform: scale(1.05);
-    }
-
-    100% {
-        opacity: 0.6;
-        transform: scale(1.15);
-    }
+.eb-ios .eb-background-glow {
+    opacity: 0.4;
 }
