@@ -1,0 +1,40 @@
+.text-type {
+    display: inline-block;
+    white-space: pre-wrap;
+}
+
+.text-type__content {
+    background: linear-gradient(90deg,
+            #ffcc00 0%,
+            #ffffff 25%,
+            #ffcc00 50%,
+            #ffffff 75%,
+            #ffcc00 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-flow 3s linear infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.text-type__cursor {
+    margin-left: 0.25rem;
+    display: inline-block;
+    opacity: 1;
+    color: #ffcc00;
+    -webkit-text-fill-color: #ffcc00;
+}
+
+.text-type__cursor--hidden {
+    display: none;
+}

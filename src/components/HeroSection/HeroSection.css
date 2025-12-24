@@ -1,0 +1,88 @@
+.hero-section {
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content .greeting {
+    color: #ffcc00;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.hero-content .name {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.hero-content .title {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    color: #ffffff;
+}
+
+.hero-content .highlight {
+    color: #ffcc00;
+}
+
+.hero-content .tagline {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    margin-top: 1.5rem;
+}
+
+.hero-image {
+    flex-shrink: 0;
+}
+
+.profile-electric-border {
+    border-radius: 50%;
+}
+
+.profile-circle {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 968px) {
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-content .name {
+        font-size: 3rem;
+    }
+
+    .profile-circle {
+        width: 250px;
+        height: 250px;
+    }
+}
