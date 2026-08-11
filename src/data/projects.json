@@ -20,7 +20,7 @@
         "title": "Final Project Web-IDS",
         "description": "Developed a web-based Intrusion Detection System (IDS) using Python and machine learning to detect and analyze potentially malicious web requests. The project includes log generation, payload analysis, model training, and a web interface for monitoring security events.",
         "image": "/images/Web-IDS.webp",
-        "liveUrl": "https://ktp-jade.vercel.app/",
+        "liveUrl": "https://project-web-ids.onrender.com/",
         "githubUrl": "https://github.com/kktpx/Project_web-ids"
     }
 ]
