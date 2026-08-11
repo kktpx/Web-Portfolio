@@ -13,7 +13,7 @@ const HeroSection = () => {
                     <p className="greeting">Hello World, I'm</p>
                     <h1 className="name">Kittipop Sanpho</h1>
                     <TextType
-                        text={["Computer Science Student", "Web Developer", "UI/UX Designer"]}
+                        text={["Computer Science Student", "Full-Stack Developer", "Frontend Developer"]}
                         className="title"
                         typingSpeed={80}
                         deletingSpeed={40}
