@@ -20,6 +20,18 @@ const skills = [
         logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
     },
     {
+        name: 'Python',
+        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+    },
+    {
+        name: 'Flask',
+        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg'
+    },
+    {
+        name: 'SQLite',
+        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg'
+    },
+    {
         name: 'Figma',
         logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg'
     },
