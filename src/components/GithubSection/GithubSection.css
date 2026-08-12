@@ -1,0 +1,172 @@
+.github-section {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.github-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .github-container {
+    flex-direction: row;
+  }
+}
+
+.github-card {
+  background: #0d0d0f; /* Dark background matching image */
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.calendar-card {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; /* Important for flex child with overflow */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.github-icon-wrapper {
+  background: #1a1a1c;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.header-text p {
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.calendar-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+/* Right side stats */
+.stats-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  position: relative;
+  background: #0d0d0f;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  flex: 1;
+  min-height: 120px;
+}
+
+.stat-info {
+  position: relative;
+  z-index: 2;
+}
+
+.stat-label {
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.stat-icon {
+  position: relative;
+  z-index: 2;
+  opacity: 0.2;
+}
+
+/* Theme colors for cards based on image */
+.followers-card {
+  border: 1px solid rgba(236, 72, 153, 0.15);
+}
+.followers-card .stat-value {
+  color: #ec4899;
+}
+.followers-card .stat-icon {
+  color: #ec4899;
+}
+
+.repos-card {
+  border: 1px solid rgba(34, 197, 94, 0.15);
+}
+.repos-card .stat-value {
+  color: #22c55e;
+}
+.repos-card .stat-icon {
+  color: #22c55e;
+}
+
+.stars-card {
+  border: 1px solid rgba(234, 179, 8, 0.15);
+}
+.stars-card .stat-value {
+  color: #eab308;
+}
+.stars-card .stat-icon {
+  color: #eab308;
+}
+
+/* Dotted pattern background */
+.dotted-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 15px 15px;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}

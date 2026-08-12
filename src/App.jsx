@@ -5,6 +5,7 @@ import SkillsSection from './components/SkillsSection/SkillsSection'
 import EducationSection from './components/EducationSection/EducationSection'
 import PortfolioSection from './components/PortfolioSection/PortfolioSection'
 import ContactSection from './components/ContactSection/ContactSection'
+import GithubSection from './components/GithubSection/GithubSection'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <GithubSection />
       <EducationSection />
       <PortfolioSection />
       <ContactSection />
