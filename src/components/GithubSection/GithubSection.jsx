@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GitHubCalendar from 'react-github-calendar';
+import { GitHubCalendar } from 'react-github-calendar';
 import { Users, BookOpen, Star } from 'lucide-react';
 import './GithubSection.css';
 
