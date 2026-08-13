@@ -62,8 +62,8 @@ const GithubSection = () => {
               username={username} 
               colorScheme="dark"
               theme={explicitTheme}
-              blockSize={12}
-              blockMargin={4}
+              blockSize={10}
+              blockMargin={3}
               fontSize={12}
               transformData={(data) => {
                 if (!Array.isArray(data)) return data;
@@ -94,7 +94,7 @@ const GithubSection = () => {
               <h2 className="stat-value">{userData ? userData.followers : 0}</h2>
             </div>
             <div className="stat-icon pink-icon">
-              <Users size={48} />
+              <Users size={36} />
             </div>
             {/* Decorative background elements */}
             <div className="dotted-bg"></div>
@@ -108,7 +108,7 @@ const GithubSection = () => {
               <h2 className="stat-value">{userData ? userData.public_repos : 0}</h2>
             </div>
             <div className="stat-icon green-icon">
-              <BookOpen size={48} />
+              <BookOpen size={36} />
             </div>
             <div className="dotted-bg"></div>
             <div className="sparkles green-sparkles"></div>
@@ -121,7 +121,7 @@ const GithubSection = () => {
               <h2 className="stat-value">{totalStars}</h2>
             </div>
             <div className="stat-icon yellow-icon">
-              <Star size={48} />
+              <Star size={36} />
             </div>
             <div className="dotted-bg"></div>
             <div className="sparkles yellow-sparkles"></div>
