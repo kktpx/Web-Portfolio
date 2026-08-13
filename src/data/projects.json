@@ -9,6 +9,14 @@
     },
     {
         "id": 2,
+        "title": "Final Project Web-IDS",
+        "description": "Developed a web-based Intrusion Detection System (IDS) using Python and machine learning to detect and analyze potentially malicious web requests. The project includes log generation, payload analysis, model training, and a web interface for monitoring security events.",
+        "image": "/images/Web-IDS.webp",
+        "liveUrl": "https://project-web-ids.onrender.com/",
+        "githubUrl": "https://github.com/kktpx/Project_web-ids"
+    },
+    {
+        "id": 3,
         "title": "20 Shop",
         "description": "A mini-project developed for a university course. This web application simulates a football jersey store to demonstrate web development fundamentals.",
         "image": "/images/20Shop.webp",
@@ -16,11 +24,11 @@
         "githubUrl": "https://github.com/kktpx/20-shop"
     },
     {
-        "id": 3,
-        "title": "Final Project Web-IDS",
-        "description": "Developed a web-based Intrusion Detection System (IDS) using Python and machine learning to detect and analyze potentially malicious web requests. The project includes log generation, payload analysis, model training, and a web interface for monitoring security events.",
-        "image": "/images/Web-IDS.webp",
-        "liveUrl": "https://project-web-ids.onrender.com/",
-        "githubUrl": "https://github.com/kktpx/Project_web-ids"
+        "id": 4,
+        "title": "20 Shop",
+        "description": "A mini-project developed for a university course. This web application simulates a football jersey store to demonstrate web development fundamentals.",
+        "image": "/images/20Shop.webp",
+        "liveUrl": "https://20shop.vercel.app/",
+        "githubUrl": "https://github.com/kktpx/20-shop"
     }
 ]

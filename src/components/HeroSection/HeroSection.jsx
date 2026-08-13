@@ -3,7 +3,7 @@ import Section from '../common/Section';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import TextType from '../TextType/TextType';
 import './HeroSection.css';
-import profileImg from '../../../public/images/profile.webp'
+const profileImg = '/images/profile.webp';
 
 const HeroSection = () => {
     return (

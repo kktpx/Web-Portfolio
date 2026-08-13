@@ -23,7 +23,9 @@ const GithubSection = () => {
       .catch(err => console.error(err));
   }, [username]);
 
-  const totalStars = repoData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
+  const totalStars = Array.isArray(repoData) 
+    ? repoData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0)
+    : 0;
   
   // Custom theme for the GitHub Calendar to match the purple aesthetic
   const explicitTheme = {
@@ -49,6 +51,10 @@ const GithubSection = () => {
                 <p>Contribution Graph</p>
               </div>
             </div>
+            <div className="header-right">
+              <h2>{totalContributions}</h2>
+              <p>THIS YEAR TOTAL</p>
+            </div>
           </div>
           
           <div className="calendar-wrapper">
@@ -59,6 +65,22 @@ const GithubSection = () => {
               blockSize={12}
               blockMargin={4}
               fontSize={12}
+              transformData={(data) => {
+                if (!Array.isArray(data)) return data;
+                try {
+                  const currentYear = new Date().getFullYear().toString();
+                  const thisYearTotal = data
+                    .filter(day => day && day.date && typeof day.date === 'string' && day.date.startsWith(currentYear))
+                    .reduce((sum, day) => sum + (day.count || 0), 0);
+                  
+                  if (thisYearTotal !== totalContributions) {
+                    setTimeout(() => setTotalContributions(thisYearTotal), 0);
+                  }
+                } catch (e) {
+                  console.error("Error in transformData", e);
+                }
+                return data;
+              }}
             />
           </div>
         </div>
