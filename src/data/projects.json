@@ -17,18 +17,18 @@
     },
     {
         "id": 3,
+        "title": "Calcu",
+        "description": "A simple and intuitive calorie calculator for estimating daily calorie needs and fitness goals.",
+        "image": "/images/calcu.webp",
+        "liveUrl": "https://calcu-liard.vercel.app/",
+        "githubUrl": "https://github.com/kktpx/Calcu"
+    },
+    {
+        "id": 4,
         "title": "20 Shop",
         "description": "A mini-project developed for a university course. This web application simulates a football jersey store to demonstrate web development fundamentals.",
         "image": "/images/20Shop.webp",
         "liveUrl": "https://20shop.vercel.app/",
         "githubUrl": "https://github.com/kktpx/20-shop"
-    },
-    {
-        "id": 4,
-        "title": "Thai Coin Detection AI",
-        "description": "A mini project using YOLOv5, PyTorch, OpenCV, and Flask to detect Thai coins in real-time via webcam and automatically calculate their total value.",
-        "image": "/images/coin-detection.webp",
-        "liveUrl": " ",
-        "githubUrl": "https://github.com/kktpx/Coin-Detection"
     }
 ]
