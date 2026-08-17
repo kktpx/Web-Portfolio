@@ -149,35 +149,35 @@
   opacity: 0.2;
 }
 
-/* Theme colors for cards based on image */
+/* Theme colors for cards based on yellow aesthetic */
 .followers-card {
-  border: 1px solid rgba(236, 72, 153, 0.15);
+  border: 1px solid rgba(255, 204, 0, 0.15);
 }
 .followers-card .stat-value {
-  color: #ec4899;
+  color: #ffcc00;
 }
 .followers-card .stat-icon {
-  color: #ec4899;
+  color: #ffcc00;
 }
 
 .repos-card {
-  border: 1px solid rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(255, 204, 0, 0.15);
 }
 .repos-card .stat-value {
-  color: #22c55e;
+  color: #ffcc00;
 }
 .repos-card .stat-icon {
-  color: #22c55e;
+  color: #ffcc00;
 }
 
 .stars-card {
-  border: 1px solid rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(255, 204, 0, 0.15);
 }
 .stars-card .stat-value {
-  color: #eab308;
+  color: #ffcc00;
 }
 .stars-card .stat-icon {
-  color: #eab308;
+  color: #ffcc00;
 }
 
 /* Dotted pattern background */

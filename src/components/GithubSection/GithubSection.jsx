@@ -27,10 +27,10 @@ const GithubSection = () => {
     ? repoData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0)
     : 0;
   
-  // Custom theme for the GitHub Calendar to match the purple aesthetic
+  // Custom theme for the GitHub Calendar to match the yellow aesthetic
   const explicitTheme = {
-    light: ['#161b22', '#3a2468', '#5b32a3', '#864ce3', '#ab70ff'],
-    dark: ['#2d2d2d', '#4c1d95', '#6d28d9', '#8b5cf6', '#a78bfa'],
+    light: ['#161b22', '#4a3f12', '#7a6411', '#c7a312', '#ffcc00'],
+    dark: ['#161b22', '#4a3f12', '#7a6411', '#c7a312', '#ffcc00'],
   };
 
   return (
