@@ -6,6 +6,7 @@ import EducationSection from './components/EducationSection/EducationSection'
 import PortfolioSection from './components/PortfolioSection/PortfolioSection'
 import ContactSection from './components/ContactSection/ContactSection'
 import GithubSection from './components/GithubSection/GithubSection'
+import Footer from './components/Footer/Footer'
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <EducationSection />
       <PortfolioSection />
       <ContactSection />
+      <Footer />
     </div>
   )
 }
