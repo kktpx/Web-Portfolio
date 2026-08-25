@@ -26,6 +26,13 @@ const PortfolioSection = () => {
                             <div className="project-content">
                                 <h3 className="project-title">{project.title}</h3>
                                 <p className="project-description">{project.description}</p>
+                                {project.tech && (
+                                    <div className="project-tech">
+                                        {project.tech.map((t, i) => (
+                                            <span key={i} className="tech-tag">{t}</span>
+                                        ))}
+                                    </div>
+                                )}
                                 <div className="project-buttons">
                                     <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer">
                                         Live

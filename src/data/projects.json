@@ -5,7 +5,8 @@
         "description": "My personal website, I created this website to display my profile, skills and projects. As well as my place to try new technology.",
         "image": "/images/WebPort.webp",
         "liveUrl": "https://ktp-jade.vercel.app/",
-        "githubUrl": "https://github.com/kktpx/Web-Portfolio"
+        "githubUrl": "https://github.com/kktpx/Web-Portfolio",
+        "tech": ["React", "Vite", "CSS", "JavaScript"]
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "description": "Developed a web-based Intrusion Detection System (IDS) using Python and machine learning to detect and analyze potentially malicious web requests. The project includes log generation, payload analysis, model training, and a web interface for monitoring security events.",
         "image": "/images/Web-IDS.webp",
         "liveUrl": "https://project-web-ids.onrender.com/",
-        "githubUrl": "https://github.com/kktpx/Project_web-ids"
+        "githubUrl": "https://github.com/kktpx/Project_web-ids",
+        "tech": ["Python", "Flask", "Machine Learning", "HTML/CSS"]
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "description": "A simple and intuitive calorie calculator for estimating daily calorie needs and fitness goals.",
         "image": "/images/calcu.webp",
         "liveUrl": "https://calcu-liard.vercel.app/",
-        "githubUrl": "https://github.com/kktpx/Calcu"
+        "githubUrl": "https://github.com/kktpx/Calcu",
+        "tech": ["React", "Vite", "CSS", "JavaScript"]
     },
     {
         "id": 4,
@@ -29,6 +32,7 @@
         "description": "A mini-project developed for a university course. This web application simulates a football jersey store to demonstrate web development fundamentals.",
         "image": "/images/20Shop.webp",
         "liveUrl": "https://20shop.vercel.app/",
-        "githubUrl": "https://github.com/kktpx/20-shop"
+        "githubUrl": "https://github.com/kktpx/20-shop",
+        "tech": ["React", "Next.js", "CSS", "JavaScript"]
     }
 ]
