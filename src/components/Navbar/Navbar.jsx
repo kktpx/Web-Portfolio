@@ -1,10 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+    
+    const indicatorRef = useRef(null);
+    const navLinksRef = useRef(null);
+
+    useEffect(() => {
+        const updateIndicator = () => {
+            if (!navLinksRef.current || !indicatorRef.current) return;
+            // Only show indicator on desktop
+            if (window.innerWidth <= 768) return;
+            
+            const activeEl = navLinksRef.current.querySelector('.nav-item.active a');
+            if (activeEl) {
+                const { offsetLeft, offsetWidth } = activeEl.parentElement;
+                indicatorRef.current.style.left = `${offsetLeft}px`;
+                indicatorRef.current.style.width = `${offsetWidth}px`;
+                indicatorRef.current.style.opacity = '1';
+            } else {
+                indicatorRef.current.style.opacity = '0';
+            }
+        };
+
+        updateIndicator();
+        window.addEventListener('resize', updateIndicator);
+        
+        // Small delay to ensure layout is done
+        setTimeout(updateIndicator, 100);
+
+        return () => window.removeEventListener('resize', updateIndicator);
+    }, [activeSection, isMenuOpen]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -62,7 +91,8 @@ const Navbar = () => {
                 </button>
 
                 {/* Navigation Links */}
-                <ul className={"navbar-links " + (isMenuOpen ? 'navbar-links--open' : '')}>
+                <ul ref={navLinksRef} className={"navbar-links " + (isMenuOpen ? 'navbar-links--open' : '')}>
+                    <div ref={indicatorRef} className="nav-indicator"></div>
                     {navItems.map((item) => (
                         <li
                             key={item.id}

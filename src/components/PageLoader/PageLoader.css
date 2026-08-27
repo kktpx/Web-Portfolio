@@ -1,0 +1,43 @@
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0f0f0f;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-logo {
+    color: #ffcc00;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.loader-bar {
+    width: 150px;
+    height: 2px;
+    background-color: #333;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-bar-fill {
+    width: 0%;
+    height: 100%;
+    background-color: #ffcc00;
+}
