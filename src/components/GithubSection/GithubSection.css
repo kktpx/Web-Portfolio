@@ -92,14 +92,34 @@
 
 .calendar-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
   padding-bottom: 0.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+/* Hide scrollbar for cleaner look */
+.calendar-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.calendar-wrapper::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+.calendar-wrapper::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .calendar-wrapper {
+    justify-content: center;
+  }
 }
 
 .calendar-wrapper svg {
-  max-width: 100%;
+  max-width: none; /* Allow SVG to stretch past container if needed */
+  min-width: 600px; /* Force minimum width to trigger scroll on small screens */
   height: auto;
 }
 
