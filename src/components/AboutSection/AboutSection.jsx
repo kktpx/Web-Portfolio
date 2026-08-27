@@ -1,8 +1,8 @@
-import React from 'react';
+﻿import React from 'react';
 import Section from '../common/Section';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import './AboutSection.css';
-const profileImg = '/images/profile2.webp';
+const aboutImg = '/images/profile2.webp';
 
 const AboutSection = () => {
     return (
@@ -14,9 +14,9 @@ const AboutSection = () => {
                 </div>
                 <div className="about-content">
                     <div className="about-image-container">
-                        <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.3} circular={true}>
+                        <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.3} circular={true} className="about-electric-border">
                             <div className="about-profile-circle">
-                                <img src={profileImg} alt="Kittipop Sanpho" />
+                                <img src={aboutImg} alt="About Me" />
                             </div>
                         </ElectricBorder>
                     </div>

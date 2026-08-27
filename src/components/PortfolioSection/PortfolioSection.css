@@ -163,4 +163,17 @@
     .btn {
         padding: 0.7rem 2rem;
     }
+}.project-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid transparent;
+}
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 204, 0, 0.1);
+}
+.project-image img {
+    transition: transform 0.5s ease;
+}
+.project-card:hover .project-image img {
+    transform: scale(1.05);
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import ResumeButton from '../ResumeButton/ResumeButton';
 import './Footer.css';
 
 const Footer = () => {
@@ -46,6 +47,7 @@ const Footer = () => {
           <div className="footer-socials">
             <a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill">GitHub</a>
             <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a>
+            <ResumeButton variant="pill" />
           </div>
         </div>
 
@@ -54,7 +56,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="footer-bottom">
         <div className="footer-copy">© 2026 KTP Portfolio. All rights reserved.</div>
-        <div className="footer-slogan">Welcome to My personal website</div>
+        <div className="footer-slogan">Crafting code with passion ✦</div>
       </div>
     </footer>
   );

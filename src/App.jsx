@@ -7,6 +7,7 @@ import PortfolioSection from './components/PortfolioSection/PortfolioSection'
 import ContactSection from './components/ContactSection/ContactSection'
 import GithubSection from './components/GithubSection/GithubSection'
 import Footer from './components/Footer/Footer'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.css'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <PortfolioSection />
       <ContactSection />
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }

@@ -93,4 +93,21 @@
     .timeline-line {
         min-height: 60px;
     }
+}.education-container {
+    max-width: 1100px;
+    width: 100%;
+}
+.education-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.education-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+.highlight-yellow {
+    color: #ffcc00;
 }

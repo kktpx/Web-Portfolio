@@ -1,0 +1,142 @@
+/* Wrapper */
+.resume-btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Default variant (ContactSection) */
+.resume-btn--default .resume-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: transparent;
+  border: 1px solid #ffcc00;
+  border-radius: 8px;
+  color: #ffcc00;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.resume-btn--default .resume-btn:hover {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+/* Pill variant (Footer) */
+.resume-btn--pill .resume-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid #333;
+  border-radius: 50px;
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.85rem;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.resume-btn--pill .resume-btn:hover {
+  border-color: #ffcc00;
+  color: #ffcc00;
+}
+
+/* Dropdown */
+.resume-dropdown {
+  position: absolute;
+  bottom: calc(100% + 10px);  /* Opens ABOVE the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 190px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 100;
+  animation: fadeInUp 0.2s ease;
+}
+
+/* If it's the footer, we want the dropdown to open upwards too, which is the default */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.resume-dropdown a {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  color: #d1d1d1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.resume-dropdown a:hover {
+  background: #2a2a2a;
+  color: #ffcc00;
+}
+
+/* Separator line between options */
+.resume-dropdown a:not(:last-child) {
+  border-bottom: 1px solid #333;
+}
+/* Secondary variant (HeroSection) */
+.resume-btn--secondary .resume-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #444;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.resume-btn--secondary .resume-btn:hover {
+  border-color: #ffcc00;
+  color: #ffcc00;
+  transform: translateY(-3px);
+}
+
+.resume-btn--secondary .resume-dropdown {
+  bottom: auto;
+  top: calc(100% + 10px); /* Open BELOW the button in Hero section */
+  transform: translateX(-50%);
+  animation: fadeInDown 0.2s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

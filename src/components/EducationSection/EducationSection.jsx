@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Section from '../common/Section';
 import './EducationSection.css';
 
@@ -20,22 +20,27 @@ const educationData = [
 const EducationSection = () => {
     return (
         <Section id="education" className="education-section" hasGap={true}>
-            <div className="education-card">
-                <div className="timeline">
-                    {educationData.map((item, index) => (
-                        <div key={index} className="timeline-item">
-                            <div className="timeline-marker">
-                                <div className="timeline-dot"></div>
-                                {index < educationData.length - 1 && <div className="timeline-line"></div>}
+            <div className="education-container">
+                <div className="education-header">
+                    <h2 className="education-title">My <span className="highlight-yellow">Education</span></h2>
+                </div>
+                <div className="education-card">
+                    <div className="timeline">
+                        {educationData.map((item, index) => (
+                            <div key={index} className="timeline-item">
+                                <div className="timeline-marker">
+                                    <div className="timeline-dot"></div>
+                                    {index < educationData.length - 1 && <div className="timeline-line"></div>}
+                                </div>
+                                <div className="timeline-content">
+                                    <span className="timeline-period">{item.period}</span>
+                                    <h3 className="timeline-degree">{item.degree}</h3>
+                                    <p className="timeline-institution">{item.institution}</p>
+                                    <p className="timeline-description">{item.description}</p>
+                                </div>
                             </div>
-                            <div className="timeline-content">
-                                <span className="timeline-period">{item.period}</span>
-                                <h3 className="timeline-degree">{item.degree}</h3>
-                                <p className="timeline-institution">{item.institution}</p>
-                                <p className="timeline-description">{item.description}</p>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </Section>

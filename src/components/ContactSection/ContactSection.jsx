@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Section from '../common/Section';
+import ResumeButton from '../ResumeButton/ResumeButton';
 import './ContactSection.css';
 
 const ContactSection = () => {
@@ -22,12 +23,6 @@ const ContactSection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('loading');
-
-        // Debug: Check env values
-        console.log('=== EmailJS Debug ===');
-        console.log('Service ID:', import.meta.env.VITE_EMAILJS_SERVICE_ID || 'UNDEFINED');
-        console.log('Template ID:', import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'UNDEFINED');
-        console.log('Public Key:', import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'UNDEFINED');
 
         try {
             await emailjs.send(
@@ -173,6 +168,11 @@ const ContactSection = () => {
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
                                 </a>
                             </div>
+                        </div>
+
+                        <div className="resume-section">
+                            <span className="social-label">Download Resume</span>
+                            <ResumeButton variant="default" />
                         </div>
                     </div>
                 </div>

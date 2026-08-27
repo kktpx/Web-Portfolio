@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Section from '../common/Section';
 import './SkillsSection.css';
 import { Database, FileJson, Sparkles, Cloud, Triangle, Workflow } from 'lucide-react';
@@ -67,3 +67,5 @@ const SkillsSection = () => {
 };
 
 export default SkillsSection;
+
+

@@ -205,6 +205,10 @@
     border-top: 1px solid #333;
 }
 
+.resume-section {
+    margin-top: 2rem;
+}
+
 .social-label {
     display: block;
     font-size: 0.8rem;

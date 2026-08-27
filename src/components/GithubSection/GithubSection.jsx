@@ -1,7 +1,48 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { Users, BookOpen, Star } from 'lucide-react';
 import './GithubSection.css';
+
+const useCountUp = (end, duration = 2000) => {
+    const [count, setCount] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasStarted) {
+                    setHasStarted(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [hasStarted]);
+
+    useEffect(() => {
+        if (!hasStarted || end === 0) return;
+        let start = 0;
+        const startTime = performance.now();
+
+        const step = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOutCubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * end));
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                setCount(end);
+            }
+        };
+        requestAnimationFrame(step);
+    }, [hasStarted, end, duration]);
+
+    return { count, ref };
+};
 
 const GithubSection = () => {
   const username = "kktpx";
@@ -11,13 +52,13 @@ const GithubSection = () => {
 
   useEffect(() => {
     // Fetch basic user data
-    fetch(`https://api.github.com/users/${username}`)
+    fetch("https://api.github.com/users/" + username)
       .then(res => res.json())
       .then(data => setUserData(data))
       .catch(err => console.error(err));
 
     // Fetch repos for stars calculation
-    fetch(`https://api.github.com/users/${username}/repos?per_page=100`)
+    fetch("https://api.github.com/users/" + username + "/repos?per_page=100")
       .then(res => res.json())
       .then(data => setRepoData(data))
       .catch(err => console.error(err));
@@ -27,6 +68,10 @@ const GithubSection = () => {
     ? repoData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0)
     : 0;
   
+  const { count: followersCount, ref: followersRef } = useCountUp(userData?.followers || 0);
+  const { count: reposCount, ref: reposRef } = useCountUp(userData?.public_repos || 0);
+  const { count: starsCount, ref: starsRef } = useCountUp(totalStars);
+
   // Custom theme for the GitHub Calendar to match the yellow aesthetic
   const explicitTheme = {
     light: ['#161b22', '#4a3f12', '#7a6411', '#c7a312', '#ffcc00'],
@@ -87,45 +132,64 @@ const GithubSection = () => {
 
         {/* Right Side: Stats Cards */}
         <div className="stats-column">
-          {/* Followers Card */}
-          <div className="stat-card followers-card">
-            <div className="stat-info">
-              <p className="stat-label">Followers</p>
-              <h2 className="stat-value">{userData ? userData.followers : 0}</h2>
-            </div>
-            <div className="stat-icon pink-icon">
-              <Users size={36} />
-            </div>
-            {/* Decorative background elements */}
-            <div className="dotted-bg"></div>
-            <div className="sparkles pink-sparkles"></div>
-          </div>
+          {!userData ? (
+            <>
+              <div className="stat-card skeleton-card">
+                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
+                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+              </div>
+              <div className="stat-card skeleton-card">
+                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
+                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+              </div>
+              <div className="stat-card skeleton-card">
+                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
+                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Followers Card */}
+              <div className="stat-card followers-card" ref={followersRef}>
+                <div className="stat-info">
+                  <p className="stat-label">Followers</p>
+                  <h2 className="stat-value">{followersCount}</h2>
+                </div>
+                <div className="stat-icon pink-icon">
+                  <Users size={36} />
+                </div>
+                {/* Decorative background elements */}
+                <div className="dotted-bg"></div>
+                <div className="sparkles pink-sparkles"></div>
+              </div>
 
-          {/* Public Repos Card */}
-          <div className="stat-card repos-card">
-            <div className="stat-info">
-              <p className="stat-label">Public Repos</p>
-              <h2 className="stat-value">{userData ? userData.public_repos : 0}</h2>
-            </div>
-            <div className="stat-icon green-icon">
-              <BookOpen size={36} />
-            </div>
-            <div className="dotted-bg"></div>
-            <div className="sparkles green-sparkles"></div>
-          </div>
+              {/* Public Repos Card */}
+              <div className="stat-card repos-card" ref={reposRef}>
+                <div className="stat-info">
+                  <p className="stat-label">Public Repos</p>
+                  <h2 className="stat-value">{reposCount}</h2>
+                </div>
+                <div className="stat-icon green-icon">
+                  <BookOpen size={36} />
+                </div>
+                <div className="dotted-bg"></div>
+                <div className="sparkles green-sparkles"></div>
+              </div>
 
-          {/* GitHub Stars Card */}
-          <div className="stat-card stars-card">
-            <div className="stat-info">
-              <p className="stat-label">GitHub Stars</p>
-              <h2 className="stat-value">{totalStars}</h2>
-            </div>
-            <div className="stat-icon yellow-icon">
-              <Star size={36} />
-            </div>
-            <div className="dotted-bg"></div>
-            <div className="sparkles yellow-sparkles"></div>
-          </div>
+              {/* GitHub Stars Card */}
+              <div className="stat-card stars-card" ref={starsRef}>
+                <div className="stat-info">
+                  <p className="stat-label">GitHub Stars</p>
+                  <h2 className="stat-value">{starsCount}</h2>
+                </div>
+                <div className="stat-icon yellow-icon">
+                  <Star size={36} />
+                </div>
+                <div className="dotted-bg"></div>
+                <div className="sparkles yellow-sparkles"></div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -133,3 +197,4 @@ const GithubSection = () => {
 };
 
 export default GithubSection;
+

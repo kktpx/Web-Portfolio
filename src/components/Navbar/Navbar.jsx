@@ -11,7 +11,7 @@ const Navbar = () => {
             setIsScrolled(window.scrollY > 50);
 
             // Scroll spy - detect active section
-            const sections = ['home', 'about', 'skills', 'education', 'portfolio', 'contact'];
+            const sections = ['home', 'about', 'skills', 'github-stats', 'education', 'portfolio', 'contact'];
             const scrollPosition = window.scrollY + 150;
 
             for (let i = sections.length - 1; i >= 0; i--) {
@@ -44,7 +44,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
+        <nav className={"navbar " + (isScrolled ? 'navbar--scrolled' : '')}>
             <div className="navbar-container">
                 <div className="navbar-logo">
                     <span className="logo-text">KTP</span>
@@ -52,7 +52,7 @@ const Navbar = () => {
 
                 {/* Hamburger Menu Button */}
                 <button
-                    className={`hamburger ${isMenuOpen ? 'hamburger--active' : ''}`}
+                    className={"hamburger " + (isMenuOpen ? 'hamburger--active' : '')}
                     onClick={toggleMenu}
                     aria-label="Toggle menu"
                 >
@@ -62,13 +62,13 @@ const Navbar = () => {
                 </button>
 
                 {/* Navigation Links */}
-                <ul className={`navbar-links ${isMenuOpen ? 'navbar-links--open' : ''}`}>
+                <ul className={"navbar-links " + (isMenuOpen ? 'navbar-links--open' : '')}>
                     {navItems.map((item) => (
                         <li
                             key={item.id}
-                            className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+                            className={"nav-item " + (activeSection === item.id ? 'active' : '')}
                         >
-                            <a href={`#${item.id}`} onClick={closeMenu}>{item.label}</a>
+                            <a href={"#" + item.id} onClick={closeMenu}>{item.label}</a>
                         </li>
                     ))}
                 </ul>

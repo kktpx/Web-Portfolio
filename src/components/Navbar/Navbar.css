@@ -59,7 +59,7 @@
 }
 
 .nav-item.active a {
-    border-bottom: 2px solid #ffcc00;
+    color: #ffcc00;
 }
 
 /* Hamburger Menu Button */
@@ -161,4 +161,45 @@
     .navbar-links {
         width: 80%;
     }
+}.nav-item a {
+    position: relative;
+}
+
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #ffcc00;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item.active a::after,
+.nav-item a:hover::after {
+    width: 100%;
+}
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.lang-switcher {
+    background: transparent;
+    border: 1px solid #ffcc00;
+    color: #ffcc00;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.lang-switcher:hover {
+    background: #ffcc00;
+    color: #000;
 }
