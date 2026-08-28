@@ -1,42 +1,58 @@
-﻿import React from 'react';
+import React from 'react';
 import Section from '../common/Section';
-import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import './AboutSection.css';
-const aboutImg = '/images/profile2.webp';
 
 const AboutSection = () => {
     return (
         <Section id="about" className="about-section" hasGap={true}>
             <div className="about-card">
-                <div className="about-header">
-                    <h2 className="about-title">About Me</h2>
-                    <div className="title-line"></div>
-                </div>
-                <div className="about-content">
-                    <div className="about-image-container">
-                        <ElectricBorder color="#ffcc00" thickness={4} speed={0.7} chaos={0.3} circular={true} className="about-electric-border">
-                            <div className="about-profile-circle">
-                                <img src={aboutImg} alt="About Me" />
-                            </div>
-                        </ElectricBorder>
+                <div className="about-grid">
+                    {/* Left: About Me */}
+                    <div className="about-left">
+                        <h2 className="about-title">About me</h2>
+                        <p className="about-paragraph">
+                            I'm a Computer Science student driven by a passion for crafting elegant, 
+                            scalable software solutions. My journey into tech began with a deep curiosity 
+                            about how digital systems operate, and it has since grown into a strong 
+                            commitment to building impactful and innovative web applications.
+                        </p>
+                        <p className="about-paragraph">
+                            Beyond coding, I enjoy staying ahead of emerging technology trends, exploring 
+                            modern UI/UX design principles, and building side projects that constantly push 
+                            my technical boundaries. I strongly believe in continuous growth and the power 
+                            of collaborative problem-solving.
+                        </p>
+                        <p className="about-paragraph">
+                            Currently, my focus is on full-stack web development, where I strive to 
+                            architect robust backends and design seamless, accessible, and user-centric 
+                            frontend experiences.
+                        </p>
                     </div>
-                    <div className="about-text">
-                        <p>
-                            I'm a Computer Science student with a deep passion for creating
-                            elegant solutions to complex problems. My journey in tech started
-                            with curiosity about how things work, and has evolved into a
-                            commitment to building innovative digital experiences.
-                        </p>
-                        <p>
-                            When I'm not coding, you can find me exploring new design trends,
-                            learning about emerging technologies, or working on personal
-                            projects that challenge me to grow. I believe in the power of
-                            continuous learning and pushing boundaries.
-                        </p>
-                        <p>
-                            Currently, I'm focused on full-stack web development and creating
-                            user-centric interfaces that are both beautiful and functional.
-                        </p>
+
+                    {/* Right: Education + Core Skills */}
+                    <div className="about-right">
+                        <div className="about-education">
+                            <h3 className="about-subtitle">Education</h3>
+                            <div className="edu-item">
+                                <h4 className="edu-degree">Bachelor of Computer Science</h4>
+                                <p className="edu-meta">RMUTSB • GPA: 3.49 • 2023 - Present</p>
+                                <p className="edu-detail">
+                                    Rajamangala University of Technology Suvarnabhumi (Huntra Campus). 
+                                    Faculty of Science and Technology, majoring in Computer Science.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="about-skills">
+                            <h3 className="about-subtitle">Core Skills</h3>
+                            <ul className="core-skills-list">
+                                <li>Positive Attitude</li>
+                                <li>Curiosity and Lifelong Learning</li>
+                                <li>Teamwork and Collaboration</li>
+                                <li>Communication</li>
+                                <li>Flexibility and Adaptability</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

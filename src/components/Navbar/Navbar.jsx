@@ -40,7 +40,7 @@ const Navbar = () => {
             setIsScrolled(window.scrollY > 50);
 
             // Scroll spy - detect active section
-            const sections = ['home', 'about', 'skills', 'github-stats', 'education', 'portfolio', 'contact'];
+            const sections = ['home', 'about', 'skills', 'github-stats', 'portfolio', 'contact'];
             const scrollPosition = window.scrollY + 150;
 
             for (let i = sections.length - 1; i >= 0; i--) {

@@ -3,7 +3,6 @@ import Navbar from './components/Navbar/Navbar'
 import HeroSection from './components/HeroSection/HeroSection'
 import AboutSection from './components/AboutSection/AboutSection'
 import SkillsSection from './components/SkillsSection/SkillsSection'
-import EducationSection from './components/EducationSection/EducationSection'
 import PortfolioSection from './components/PortfolioSection/PortfolioSection'
 import ContactSection from './components/ContactSection/ContactSection'
 import GithubSection from './components/GithubSection/GithubSection'
@@ -23,7 +22,6 @@ function App() {
       <AboutSection />
       <SkillsSection />
       <GithubSection />
-      <EducationSection />
       <PortfolioSection />
       <ContactSection />
       <Footer />
