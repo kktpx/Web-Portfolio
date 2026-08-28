@@ -102,3 +102,22 @@
         flex: 0 0 50px;
     }
 }
+@media (max-width: 480px) {
+    .about-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+    .about-title {
+        font-size: 1.8rem;
+    }
+    .about-text p {
+        font-size: 1rem;
+    }
+    .about-profile-circle {
+        width: 160px;
+        height: 160px;
+    }
+    .title-line {
+        flex: 0 0 50px;
+    }
+}

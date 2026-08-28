@@ -41,3 +41,12 @@
     height: 100%;
     background-color: #ffcc00;
 }
+
+@media (max-width: 480px) {
+    .loader-logo {
+        font-size: 2rem;
+    }
+    .loader-bar {
+        width: 120px;
+    }
+}

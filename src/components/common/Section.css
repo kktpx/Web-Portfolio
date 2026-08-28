@@ -36,3 +36,11 @@
         margin-bottom: 120px;
     }
 }
+@media (max-width: 480px) {
+    .section {
+        padding: 0 20px;
+    }
+    .section--gap {
+        margin-bottom: 80px;
+    }
+}

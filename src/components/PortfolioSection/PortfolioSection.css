@@ -196,3 +196,29 @@
 .project-card:hover .project-image::after {
     opacity: 1;
 }
+
+@media (max-width: 480px) {
+    .project-card {
+        padding: 1rem;
+        border-radius: 20px;
+    }
+    .project-title {
+        font-size: 1.2rem;
+    }
+    .project-description {
+        font-size: 0.9rem;
+    }
+    .project-buttons {
+        flex-direction: column;
+    }
+    .btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+    }
+    .tech-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+    }
+}

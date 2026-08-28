@@ -111,3 +111,19 @@
 .highlight-yellow {
     color: #ffcc00;
 }
+
+@media (max-width: 480px) {
+    .education-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+    .education-title {
+        font-size: 1.5rem;
+    }
+    .timeline-degree {
+        font-size: 0.9rem;
+    }
+    .timeline-institution {
+        font-size: 0.85rem;
+    }
+}

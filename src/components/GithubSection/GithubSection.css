@@ -220,3 +220,23 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+
+@media (max-width: 768px) {
+    .github-container {
+        flex-direction: column;
+    }
+    .stat-card {
+        min-height: 70px;
+    }
+}
+@media (max-width: 480px) {
+    .github-section {
+        padding: 2rem 1rem;
+    }
+    .header-right h2 {
+        font-size: 1.4rem;
+    }
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
