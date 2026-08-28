@@ -20,7 +20,9 @@
 }
 
 .github-card {
-  background: #0d0d0f; /* Dark background matching image */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border); /* Dark background matching image */
   border: 1px solid #222;
   border-radius: 12px;
   padding: 1.5rem;
@@ -107,7 +109,10 @@
   height: 6px;
 }
 .calendar-wrapper::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 4px;
 }
 .calendar-wrapper::-webkit-scrollbar-thumb {
@@ -125,7 +130,9 @@
 
 .stat-card {
   position: relative;
-  background: #0d0d0f;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border: 1px solid #222;
   border-radius: 12px;
   padding: 1.25rem;

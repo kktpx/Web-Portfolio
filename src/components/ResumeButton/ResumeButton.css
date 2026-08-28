@@ -56,7 +56,10 @@
   bottom: calc(100% + 10px);  /* Opens ABOVE the button */
   left: 50%;
   transform: translateX(-50%);
-  background: #1a1a1a;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border: 1px solid #333;
   border-radius: 10px;
   overflow: hidden;
@@ -82,7 +85,7 @@
 .resume-dropdown a {
   display: block;
   padding: 0.8rem 1.2rem;
-  color: #d1d1d1;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.2s ease;

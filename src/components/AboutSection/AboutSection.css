@@ -1,5 +1,8 @@
 .about-card {
-    background-color: #1a1a1a;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     padding: 3rem;
     border-radius: 40px;
     max-width: 1100px;
@@ -23,7 +26,7 @@
 .about-paragraph {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: #d1d1d1;
+    color: var(--text-secondary);
     margin: 0 0 1rem 0;
 }
 
@@ -70,7 +73,7 @@
 
 .core-skills-list li {
     font-size: 1.05rem;
-    color: #d1d1d1;
+    color: var(--text-secondary);
     padding-left: 1.2rem;
     position: relative;
 }

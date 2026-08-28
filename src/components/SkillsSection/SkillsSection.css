@@ -18,7 +18,11 @@
 }
 
 .highlight-yellow {
-    color: #ffcc00;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
 }
 
 .marquee-container {
@@ -96,7 +100,10 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    background-color: #1a1a1a;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     border: 1px solid #333333;
@@ -133,7 +140,7 @@
 
 .skill-name {
     font-size: 0.85rem;
-    color: #cccccc;
+    color: var(--text-secondary);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;

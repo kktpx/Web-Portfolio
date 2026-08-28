@@ -23,7 +23,10 @@
 }
 
 .contact-card {
-    background-color: #1a1a1a;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     padding: 2rem;
     border-radius: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
