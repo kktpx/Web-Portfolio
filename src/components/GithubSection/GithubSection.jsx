@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { Users, BookOpen, Star } from 'lucide-react';
 import './GithubSection.css';
@@ -53,15 +53,28 @@ const GithubSection = () => {
   useEffect(() => {
     // Fetch basic user data
     fetch("https://api.github.com/users/" + username)
-      .then(res => res.json())
+      .then(res => {
+          if (!res.ok) throw new Error("API limit");
+          return res.json();
+      })
       .then(data => setUserData(data))
-      .catch(err => console.error(err));
+      .catch(err => {
+          console.error(err);
+          // Fallback data in case of API rate limit
+          setUserData({ followers: 4, public_repos: 6 });
+      });
 
     // Fetch repos for stars calculation
     fetch("https://api.github.com/users/" + username + "/repos?per_page=100")
-      .then(res => res.json())
+      .then(res => {
+          if (!res.ok) throw new Error("API limit");
+          return res.json();
+      })
       .then(data => setRepoData(data))
-      .catch(err => console.error(err));
+      .catch(err => {
+          console.error(err);
+          setRepoData([{ stargazers_count: 2 }]); // Fallback stars
+      });
   }, [username]);
 
   const totalStars = Array.isArray(repoData) 
@@ -150,7 +163,7 @@ const GithubSection = () => {
           ) : (
             <>
               {/* Followers Card */}
-              <div className="stat-card followers-card" ref={followersRef}>
+              <a href={\`https://github.com/\${username}?tab=followers\`} target="_blank" rel="noopener noreferrer" className="stat-card followers-card" ref={followersRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">Followers</p>
                   <h2 className="stat-value">{followersCount}</h2>
@@ -161,10 +174,10 @@ const GithubSection = () => {
                 {/* Decorative background elements */}
                 <div className="dotted-bg"></div>
                 <div className="sparkles pink-sparkles"></div>
-              </div>
+              </a>
 
               {/* Public Repos Card */}
-              <div className="stat-card repos-card" ref={reposRef}>
+              <a href={\`https://github.com/\${username}?tab=repositories\`} target="_blank" rel="noopener noreferrer" className="stat-card repos-card" ref={reposRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">Public Repos</p>
                   <h2 className="stat-value">{reposCount}</h2>
@@ -174,10 +187,10 @@ const GithubSection = () => {
                 </div>
                 <div className="dotted-bg"></div>
                 <div className="sparkles green-sparkles"></div>
-              </div>
+              </a>
 
               {/* GitHub Stars Card */}
-              <div className="stat-card stars-card" ref={starsRef}>
+              <a href={\`https://github.com/\${username}\`} target="_blank" rel="noopener noreferrer" className="stat-card stars-card" ref={starsRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">GitHub Stars</p>
                   <h2 className="stat-value">{starsCount}</h2>
@@ -187,7 +200,7 @@ const GithubSection = () => {
                 </div>
                 <div className="dotted-bg"></div>
                 <div className="sparkles yellow-sparkles"></div>
-              </div>
+              </a>
             </>
           )}
         </div>
