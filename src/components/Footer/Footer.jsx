@@ -1,5 +1,6 @@
 import React from 'react';
 import ResumeButton from '../ResumeButton/ResumeButton';
+import Magnetic from '../common/Magnetic';
 import './Footer.css';
 
 const Footer = () => {
@@ -37,7 +38,7 @@ const Footer = () => {
           <ul className="footer-links">
             <li><a href="#skills">Skills</a></li>
             <li><a href="#github">Github</a></li>
-            <li><a href="#education">Education</a></li>
+            
           </ul>
         </div>
 
@@ -45,9 +46,9 @@ const Footer = () => {
         <div className="footer-col">
           <h4 className="footer-title">Follow KTP</h4>
           <div className="footer-socials">
-            <a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill">GitHub</a>
-            <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a>
-            <ResumeButton variant="pill" />
+            <Magnetic><a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill">GitHub</a></Magnetic>
+            <Magnetic><a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a></Magnetic>
+            <Magnetic><div><ResumeButton variant="pill" /></div></Magnetic>
           </div>
         </div>
 

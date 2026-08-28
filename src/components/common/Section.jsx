@@ -1,4 +1,4 @@
-﻿import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Section.css';
@@ -52,6 +52,26 @@ const Section = ({ id, className = '', isFirst = false, hasGap = true, children 
                     },
                 }
             );
+
+            // Title glow effect
+            const titles = sectionRef.current.querySelectorAll('.portfolio-title, .skills-title, .contact-main-title, .about-title');
+            if (titles.length > 0) {
+                gsap.fromTo(titles,
+                    { textShadow: "0px 0px 0px rgba(255,204,0,0)" },
+                    {
+                        textShadow: "0px 0px 20px rgba(255,204,0,0.8)",
+                        duration: 0.5,
+                        yoyo: true,
+                        repeat: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: sectionRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none',
+                        }
+                    }
+                );
+            }
         } else {
             // Fallback for sections without stagger targets
             gsap.fromTo(sectionRef.current,

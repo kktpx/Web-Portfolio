@@ -54,3 +54,18 @@
 /* Prevent flex items from expanding Section container */
 .section-content { min-width: 0; width: 100%; max-width: 100vw; }
 .section { width: 100%; max-width: 100vw; overflow: hidden; }
+
+.section--gap {
+    position: relative;
+}
+.section--gap::after {
+    content: '';
+    position: absolute;
+    bottom: -75px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.3), transparent);
+    pointer-events: none;
+}

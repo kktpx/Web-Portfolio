@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Section from '../common/Section';
+import Magnetic from '../common/Magnetic';
 import ResumeButton from '../ResumeButton/ResumeButton';
 import './ContactSection.css';
 
@@ -106,6 +107,7 @@ const ContactSection = () => {
                                 </div>
                             )}
 
+                            <Magnetic>
                             <button
                                 type="submit"
                                 className={`submit-btn ${status === 'loading' ? 'submit-btn--loading' : ''}`}
@@ -113,6 +115,7 @@ const ContactSection = () => {
                             >
                                 {status === 'loading' ? 'Sending...' : 'Send a Message'}
                             </button>
+                            </Magnetic>
                         </form>
                     </div>
 
@@ -161,18 +164,18 @@ const ContactSection = () => {
                         <div className="social-section">
                             <span className="social-label">Follow Me</span>
                             <div className="social-icons">
-                                <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <Magnetic><a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
-                                </a>
-                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                </a></Magnetic>
+                                <Magnetic><a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
-                                </a>
+                                </a></Magnetic>
                             </div>
                         </div>
 
                         <div className="resume-section">
                             <span className="social-label">Download Resume</span>
-                            <ResumeButton variant="default" />
+                            <Magnetic><div><ResumeButton variant="default" /></div></Magnetic>
                         </div>
                     </div>
                 </div>

@@ -288,3 +288,7 @@
         height: 42px;
     }
 }
+
+.contact-section::after {
+    display: none;
+}
