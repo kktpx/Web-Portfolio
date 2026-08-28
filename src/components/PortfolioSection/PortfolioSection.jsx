@@ -1,6 +1,5 @@
 import React from 'react';
 import Section from '../common/Section';
-import Magnetic from '../common/Magnetic';
 import projectsData from '../../data/projects.json';
 import './PortfolioSection.css';
 
@@ -70,12 +69,12 @@ const PortfolioSection = () => {
                                     </div>
                                 )}
                                 <div className="project-buttons">
-                                    <Magnetic><a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer">
+                                    <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer">
                                         Live
-                                    </a></Magnetic>
-                                    <Magnetic><a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer">
+                                    </a>
+                                    <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer">
                                         Github
-                                    </a></Magnetic>
+                                    </a>
                                 </div>
                             </div>
                         </TiltCard>

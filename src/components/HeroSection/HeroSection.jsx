@@ -1,7 +1,6 @@
 ﻿import React, { useEffect, useRef } from 'react';
 import { Download } from 'lucide-react';
 import Section from '../common/Section';
-import Magnetic from '../common/Magnetic';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import TextType from '../TextType/TextType';
 import ResumeButton from '../ResumeButton/ResumeButton';
@@ -93,8 +92,8 @@ const HeroSection = () => {
                     />
                     <p className="tagline">Building elegant digital experiences with modern technologies</p>
                     <div className="hero-cta">
-                        <Magnetic><a href="#portfolio" className="cta-btn cta-primary">View My Work</a></Magnetic>
-                        <Magnetic><div><ResumeButton variant="secondary" /></div></Magnetic>
+                        <a href="#portfolio" className="cta-btn cta-primary">View My Work</a>
+                        <ResumeButton variant="secondary" />
                     </div>
                 </div>
                 <div className="hero-image">
