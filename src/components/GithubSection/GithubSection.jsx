@@ -4,44 +4,44 @@ import { Users, BookOpen, Star } from 'lucide-react';
 import './GithubSection.css';
 
 const useCountUp = (end, duration = 2000) => {
-    const [count, setCount] = useState(0);
-    const [hasStarted, setHasStarted] = useState(false);
-    const ref = useRef(null);
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !hasStarted) {
-                    setHasStarted(true);
-                }
-            },
-            { threshold: 0.3 }
-        );
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, [hasStarted]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasStarted]);
 
-    useEffect(() => {
-        if (!hasStarted || end === 0) return;
-        let start = 0;
-        const startTime = performance.now();
+  useEffect(() => {
+    if (!hasStarted || end === 0) return;
+    let start = 0;
+    const startTime = performance.now();
 
-        const step = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // easeOutCubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * end));
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            } else {
-                setCount(end);
-            }
-        };
+    const step = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * end));
+      if (progress < 1) {
         requestAnimationFrame(step);
-    }, [hasStarted, end, duration]);
+      } else {
+        setCount(end);
+      }
+    };
+    requestAnimationFrame(step);
+  }, [hasStarted, end, duration]);
 
-    return { count, ref };
+  return { count, ref };
 };
 
 const GithubSection = () => {
@@ -54,33 +54,33 @@ const GithubSection = () => {
     // Fetch basic user data
     fetch("https://api.github.com/users/" + username)
       .then(res => {
-          if (!res.ok) throw new Error("API limit");
-          return res.json();
+        if (!res.ok) throw new Error("API limit");
+        return res.json();
       })
       .then(data => setUserData(data))
       .catch(err => {
-          console.error(err);
-          // Fallback data in case of API rate limit
-          setUserData({ followers: 4, public_repos: 6 });
+        console.error(err);
+        // Fallback data in case of API rate limit
+        setUserData({ followers: 4, public_repos: 6 });
       });
 
     // Fetch repos for stars calculation
     fetch("https://api.github.com/users/" + username + "/repos?per_page=100")
       .then(res => {
-          if (!res.ok) throw new Error("API limit");
-          return res.json();
+        if (!res.ok) throw new Error("API limit");
+        return res.json();
       })
       .then(data => setRepoData(data))
       .catch(err => {
-          console.error(err);
-          setRepoData([{ stargazers_count: 2 }]); // Fallback stars
+        console.error(err);
+        setRepoData([{ stargazers_count: 2 }]); // Fallback stars
       });
   }, [username]);
 
-  const totalStars = Array.isArray(repoData) 
+  const totalStars = Array.isArray(repoData)
     ? repoData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0)
     : 0;
-  
+
   const { count: followersCount, ref: followersRef } = useCountUp(userData?.followers || 0);
   const { count: reposCount, ref: reposRef } = useCountUp(userData?.public_repos || 0);
   const { count: starsCount, ref: starsRef } = useCountUp(totalStars);
@@ -99,7 +99,7 @@ const GithubSection = () => {
           <div className="calendar-header">
             <div className="header-left">
               <div className="github-icon-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: '#fff'}}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#fff' }}>
                   <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
                   <path d="M9 18c-4.51 2-5-2-7-2"></path>
                 </svg>
@@ -114,10 +114,10 @@ const GithubSection = () => {
               <p>THIS YEAR TOTAL</p>
             </div>
           </div>
-          
+
           <div className="calendar-wrapper">
-            <GitHubCalendar 
-              username={username} 
+            <GitHubCalendar
+              username={username}
               colorScheme="dark"
               theme={explicitTheme}
               blockSize={10}
@@ -130,7 +130,7 @@ const GithubSection = () => {
                   const thisYearTotal = data
                     .filter(day => day && day.date && typeof day.date === 'string' && day.date.startsWith(currentYear))
                     .reduce((sum, day) => sum + (day.count || 0), 0);
-                  
+
                   if (thisYearTotal !== totalContributions) {
                     setTimeout(() => setTotalContributions(thisYearTotal), 0);
                   }
@@ -148,22 +148,22 @@ const GithubSection = () => {
           {!userData ? (
             <>
               <div className="stat-card skeleton-card">
-                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
-                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '60px', height: '14px' }} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '40px', height: '28px', marginTop: '8px' }} />
               </div>
               <div className="stat-card skeleton-card">
-                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
-                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '60px', height: '14px' }} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '40px', height: '28px', marginTop: '8px' }} />
               </div>
               <div className="stat-card skeleton-card">
-                  <div className="skeleton-text skeleton-pulse" style={{width: '60px', height: '14px'}} />
-                  <div className="skeleton-text skeleton-pulse" style={{width: '40px', height: '28px', marginTop: '8px'}} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '60px', height: '14px' }} />
+                <div className="skeleton-text skeleton-pulse" style={{ width: '40px', height: '28px', marginTop: '8px' }} />
               </div>
             </>
           ) : (
             <>
               {/* Followers Card */}
-              <a href={\`https://github.com/\${username}?tab=followers\`} target="_blank" rel="noopener noreferrer" className="stat-card followers-card" ref={followersRef} style={{ textDecoration: 'none' }}>
+              <a href={"https://github.com/" + username + "?tab=followers"} target="_blank" rel="noopener noreferrer" className="stat-card followers-card" ref={followersRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">Followers</p>
                   <h2 className="stat-value">{followersCount}</h2>
@@ -177,7 +177,7 @@ const GithubSection = () => {
               </a>
 
               {/* Public Repos Card */}
-              <a href={\`https://github.com/\${username}?tab=repositories\`} target="_blank" rel="noopener noreferrer" className="stat-card repos-card" ref={reposRef} style={{ textDecoration: 'none' }}>
+              <a href={"https://github.com/" + username + "?tab=repositories"} target="_blank" rel="noopener noreferrer" className="stat-card repos-card" ref={reposRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">Public Repos</p>
                   <h2 className="stat-value">{reposCount}</h2>
@@ -190,7 +190,7 @@ const GithubSection = () => {
               </a>
 
               {/* GitHub Stars Card */}
-              <a href={\`https://github.com/\${username}\`} target="_blank" rel="noopener noreferrer" className="stat-card stars-card" ref={starsRef} style={{ textDecoration: 'none' }}>
+              <a href={"https://github.com/" + username} target="_blank" rel="noopener noreferrer" className="stat-card stars-card" ref={starsRef} style={{ textDecoration: 'none' }}>
                 <div className="stat-info">
                   <p className="stat-label">GitHub Stars</p>
                   <h2 className="stat-value">{starsCount}</h2>
@@ -202,10 +202,11 @@ const GithubSection = () => {
                 <div className="sparkles yellow-sparkles"></div>
               </a>
             </>
-          )}
-        </div>
-      </div>
-    </section>
+          )
+          }
+        </div >
+      </div >
+    </section >
   );
 };
 
