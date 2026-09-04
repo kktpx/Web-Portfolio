@@ -1,0 +1,131 @@
+/* Shared admin variables and general styles */
+:root {
+  --admin-bg: #0f0f0f;
+  --admin-surface: rgba(20, 20, 20, 0.6);
+  --admin-surface-hover: rgba(40, 40, 40, 0.8);
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-accent: #ffcc00;
+  --admin-accent-hover: #ff9900;
+  --admin-text: #ffffff;
+  --admin-text-muted: #a0a0a0;
+  --admin-danger: #ef4444;
+  --admin-danger-hover: #dc2626;
+  --admin-success: #10b981;
+}
+
+body {
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+.admin-page-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin-page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--admin-accent);
+}
+
+.admin-card {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+}
+
+/* Forms */
+.admin-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.admin-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+}
+
+.admin-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  color: var(--admin-text);
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+}
+
+.admin-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Buttons */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.admin-btn-primary {
+  background-color: var(--admin-accent);
+  color: #000;
+}
+
+.admin-btn-primary:hover:not(:disabled) {
+  background-color: var(--admin-accent-hover);
+}
+
+.admin-btn-secondary {
+  background-color: transparent;
+  color: var(--admin-text);
+  border: 1px solid var(--admin-border);
+}
+
+.admin-btn-secondary:hover:not(:disabled) {
+  border-color: var(--admin-text-muted);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.admin-btn-danger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--admin-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.admin-btn-danger:hover:not(:disabled) {
+  background-color: var(--admin-danger);
+  color: white;
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

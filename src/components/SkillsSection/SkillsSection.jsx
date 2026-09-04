@@ -38,7 +38,7 @@ const SkillsSection = () => {
     return (
         <Section id="skills" className="skills-section" hasGap={true}>
             <div className="skills-header">
-                <h2 className="skills-title">Core <span className="highlight-yellow">Skills</span></h2>
+                <h2 className="skills-title">Core <span className="highlight-yellow">Stack</span></h2>
             </div>
             <div className="marquee-container">
                 {skillRows.map((row, rowIndex) => (
