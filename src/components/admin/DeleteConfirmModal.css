@@ -1,0 +1,106 @@
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.admin-modal-content {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: modalIn 0.2s ease-out;
+}
+
+.admin-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.admin-modal-close:hover {
+  color: var(--admin-text);
+}
+
+.delete-modal {
+  max-width: 400px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.delete-modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.delete-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--admin-danger);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.delete-modal-header h2 {
+  margin: 0;
+  color: var(--admin-text);
+  font-size: 1.5rem;
+}
+
+.delete-modal-body p {
+  margin: 0 0 0.5rem;
+  color: var(--admin-text-muted);
+}
+
+.delete-target-name {
+  color: var(--admin-text) !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 1rem !important;
+}
+
+.delete-warning {
+  font-size: 0.85rem;
+  color: var(--admin-danger) !important;
+  opacity: 0.8;
+}
+
+.delete-modal-footer {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.delete-modal-footer .admin-btn {
+  flex: 1;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

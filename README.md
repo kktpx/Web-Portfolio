@@ -509,3 +509,43 @@ git push origin feature/improve-project-section
 ## License
 
 No project license is documented in this README. Add a `LICENSE` file if you want to clearly define reuse and distribution permissions.
+
+---
+
+## 🛠 Back Office / Admin CMS
+
+This project includes a secure admin dashboard powered by Supabase for managing the portfolio showcase.
+
+### Features
+* Secure authentication using Supabase Auth.
+* Role-based access control (only specific users can access the admin area).
+* Create, update, delete, and publish/unpublish portfolio projects.
+* Upload project thumbnail images directly to Supabase Storage.
+* Real-time visibility updates on the public showcase.
+
+### Supabase Setup Instructions
+
+1. **Create Project**: Start a new project at [supabase.com](https://supabase.com/).
+2. **Environment Variables**: Get your URL and Anon Key from Project Settings > API. Add them to your `.env` or `.env.local` file:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+   ```
+3. **Database Schema & RLS**: Go to the SQL Editor in your Supabase dashboard and run the entire contents of the `supabase/setup.sql` file. This creates the `portfolio_projects` and `admin_users` tables, sets up Row Level Security (RLS) policies, and seeds initial data.
+4. **Storage Bucket**: 
+   * Go to Storage > Create a new bucket named `portfolio-images`.
+   * Set it to **Public**.
+   * Then, go to the SQL Editor and run the contents of `supabase/storage-policies.sql` to apply the correct security policies for the bucket.
+5. **Create First Admin Account**:
+   * Go to Authentication > Users > Add user -> Create new user. Enter an email and password.
+   * Copy the **User UID** of the newly created user.
+   * Go to the SQL Editor and run:
+     ```sql
+     INSERT INTO admin_users (user_id) VALUES ('YOUR_COPIED_USER_UID_HERE');
+     ```
+   * Now you can log in at `/admin/login`!
+
+### Admin Routes
+* `/admin/login` — Sign in (redirects away if already logged in)
+* `/admin` — Dashboard with high-level statistics
+* `/admin/portfolio` — Table view of all projects with create/edit/delete tools
