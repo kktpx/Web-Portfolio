@@ -6,9 +6,10 @@ import './GithubSection.css';
 const useCountUp = (end, duration = 2000) => {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef(null);
+  const [node, setNode] = useState(null);
 
   useEffect(() => {
+    if (!node) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasStarted) {
@@ -17,9 +18,9 @@ const useCountUp = (end, duration = 2000) => {
       },
       { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(node);
     return () => observer.disconnect();
-  }, [hasStarted]);
+  }, [hasStarted, node]);
 
   useEffect(() => {
     if (!hasStarted || end === 0) return;
@@ -41,7 +42,7 @@ const useCountUp = (end, duration = 2000) => {
     requestAnimationFrame(step);
   }, [hasStarted, end, duration]);
 
-  return { count, ref };
+  return { count, ref: setNode };
 };
 
 const GithubSection = () => {
