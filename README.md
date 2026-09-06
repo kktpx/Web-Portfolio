@@ -413,6 +413,32 @@ Add the test step after a test script is introduced.
 
 ---
 
+## 📈 Portfolio Analytics
+
+The project includes a privacy-first real-time analytics system that tracks visitor interactions and displays them in the Admin Dashboard.
+
+### Tracked Events
+- **Page Views:** Recorded once per visitor session when the portfolio loads.
+- **Project Views:** Recorded when a user scrolls to and views a specific project card (using `IntersectionObserver`).
+- **GitHub Clicks:** Recorded when a user clicks the GitHub source code link on a project.
+- **Demo Clicks:** Recorded when a user clicks the Live Demo link on a project.
+- **Resume Downloads:** Recorded when a user clicks either the Thai or English resume download links.
+- **Contact Submissions:** Recorded only when the EmailJS contact form is successfully sent.
+
+### Privacy & Security
+- **No PII:** The analytics system does not store IP addresses, names, emails, or exact locations.
+- **Anonymous Sessions:** Uses a randomly generated UUID stored in `localStorage` to identify unique sessions without invasive fingerprinting.
+- **RLS Protected:** The `portfolio_analytics` table allows public `INSERT` but strictly restricts `SELECT` and `DELETE` queries to authenticated administrators via Row Level Security (RLS).
+- **Silent Failures:** Tracking is non-blocking. If the database is unreachable or an ad-blocker blocks the request, the portfolio continues to function normally.
+
+### Setup Instructions
+If setting up the database from scratch, execute the provided SQL migration file in the Supabase SQL Editor:
+1. Open your Supabase project dashboard.
+2. Navigate to the SQL Editor.
+3. Paste and run the contents of `supabase/analytics.sql`.
+
+---
+
 ## Recommended Improvements
 
 ### High Priority

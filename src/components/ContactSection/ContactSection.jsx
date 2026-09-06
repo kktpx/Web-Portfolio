@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Section from '../common/Section';
 import ResumeButton from '../ResumeButton/ResumeButton';
+import { trackEvent } from '../../services/analyticsService';
 import './ContactSection.css';
 
 const ContactSection = () => {
@@ -37,6 +38,7 @@ const ContactSection = () => {
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             );
             setStatus('success');
+            trackEvent('contact_submit');
             setFormData({ name: '', email: '', subject: '', message: '' });
             setTimeout(() => setStatus('idle'), 5000);
         } catch (error) {

@@ -1,0 +1,20 @@
+.analytics-chart-container {
+  margin-bottom: 2rem;
+}
+
+.analytics-chart-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--admin-text);
+}
+
+.chart-wrapper {
+  margin-left: -20px; /* offset for Y axis */
+}
+
+.analytics-chart-loading {
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
