@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { trackEvent } from '../../services/analyticsService';
 import './ResumeButton.css';
 
 const ResumeButton = ({ variant = 'default' }) => {
@@ -29,10 +30,10 @@ const ResumeButton = ({ variant = 'default' }) => {
       
       {isOpen && (
         <div className="resume-dropdown">
-          <a href="/resume/resume-th.pdf" target="_blank" rel="noopener noreferrer">
+          <a href="/resume/resume-th.pdf" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('resume_download')}>
             🇹🇭 ภาษาไทย (TH)
           </a>
-          <a href="/resume/resume-en.pdf" target="_blank" rel="noopener noreferrer">
+          <a href="/resume/resume-en.pdf" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('resume_download')}>
             🇺🇸 English (ENG)
           </a>
         </div>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Section from '../common/Section';
 import { getPublishedProjects } from '../../services/projectService';
+import { trackEvent } from '../../services/analyticsService';
 import './PortfolioSection.css';
 
-const TiltCard = ({ children, className }) => {
+const TiltCard = ({ children, className, 'data-project-id': projectId }) => {
     const ref = useRef(null);
     useEffect(() => {
         const card = ref.current;
@@ -31,7 +32,7 @@ const TiltCard = ({ children, className }) => {
         };
     }, []);
     return (
-        <div ref={ref} className={className} style={{ transition: 'transform 0.1s ease-out' }}>
+        <div ref={ref} className={className} data-project-id={projectId} style={{ transition: 'transform 0.1s ease-out' }}>
             {children}
         </div>
     );
@@ -61,6 +62,32 @@ const PortfolioSection = () => {
             })
             .finally(() => setLoading(false));
     }, []);
+
+    const viewedProjects = useRef(new Set());
+
+    useEffect(() => {
+        if (!projects.length) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const projectId = entry.target.dataset.projectId;
+                        if (projectId && !viewedProjects.current.has(projectId)) {
+                            viewedProjects.current.add(projectId);
+                            trackEvent('project_view', { projectId });
+                        }
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        document.querySelectorAll('.project-card').forEach((card) => {
+            observer.observe(card);
+        });
+
+        return () => observer.disconnect();
+    }, [projects]);
 
     return (
         <Section id="portfolio" className="portfolio-section" hasGap={true}>
@@ -94,7 +121,7 @@ const PortfolioSection = () => {
                 {!loading && !error && projects.length > 0 && (
                     <div className="portfolio-grid">
                         {projects.map((project) => (
-                            <TiltCard key={project.id} className="project-card">
+                            <TiltCard key={project.id} className="project-card" data-project-id={project.id}>
                                 <div className="project-image">
                                     {project.image ? (
                                         <img src={project.image} alt={project.title} />
@@ -114,12 +141,12 @@ const PortfolioSection = () => {
                                     )}
                                     <div className="project-buttons">
                                         {project.liveUrl && (
-                                            <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer">
+                                            <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('demo_click', { projectId: project.id })}>
                                                 Live
                                             </a>
                                         )}
                                         {project.githubUrl && (
-                                            <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer">
+                                            <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('github_click', { projectId: project.id })}>
                                                 Github
                                             </a>
                                         )}
