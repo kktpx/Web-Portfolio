@@ -93,9 +93,6 @@ const ProjectForm = ({ project, onClose, onSuccess, onError }) => {
 
       if (imageFile) {
         finalImageUrl = await uploadProjectImage(imageFile);
-        if (isEditing && project.image_url) {
-          await deleteProjectImage(project.image_url);
-        }
       }
 
       const projectData = {
@@ -107,6 +104,10 @@ const ProjectForm = ({ project, onClose, onSuccess, onError }) => {
         await updateProject(project.id, projectData);
       } else {
         await createProject(projectData);
+      }
+      
+      if (imageFile && isEditing && project.image_url) {
+        await deleteProjectImage(project.image_url);
       }
 
       onSuccess();

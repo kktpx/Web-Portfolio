@@ -58,7 +58,11 @@ export async function uploadProjectImage(file) {
 
   const { error } = await supabase.storage
     .from('portfolio-images')
-    .upload(filePath, file);
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type || `image/${fileExt === 'jpg' ? 'jpeg' : fileExt}`
+    });
   if (error) throw error;
 
   const { data: { publicUrl } } = supabase.storage
