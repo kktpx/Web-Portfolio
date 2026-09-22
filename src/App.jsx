@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PortfolioManager from './pages/admin/PortfolioManager'
+import AnalyticsPage from './pages/admin/AnalyticsPage'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import AdminLayout from './components/admin/AdminLayout'
 import './App.css'
@@ -26,6 +27,7 @@ function App() {
       >
         <Route index element={<AdminDashboard />} />
         <Route path="portfolio" element={<PortfolioManager />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
       </Route>
     </Routes>
   )

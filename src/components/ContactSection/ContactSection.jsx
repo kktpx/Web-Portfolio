@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Section from '../common/Section';
 import ResumeButton from '../ResumeButton/ResumeButton';
+import { trackContactEvent, trackOutboundClick } from '../../services/analytics';
 import './ContactSection.css';
 
 const ContactSection = () => {
@@ -36,6 +37,7 @@ const ContactSection = () => {
                 },
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             );
+            trackContactEvent('contact_submit');
             setStatus('success');
             setFormData({ name: '', email: '', subject: '', message: '' });
             setTimeout(() => setStatus('idle'), 5000);
@@ -163,10 +165,14 @@ const ContactSection = () => {
                         <div className="social-section">
                             <span className="social-label">Follow Me</span>
                             <div className="social-icons">
-                                <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link"
+                                   onClick={() => trackOutboundClick('https://www.linkedin.com/in/kittipop-sanpho-7b734739b/', { platform: 'linkedin', label: 'LinkedIn Profile' })}
+                                >
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
                                 </a>
-                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link"
+                                   onClick={() => trackOutboundClick('https://github.com/kktpx', { platform: 'github', label: 'GitHub Profile' })}
+                                >
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
                                 </a>
                             </div>

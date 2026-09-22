@@ -1,5 +1,6 @@
 import React from 'react';
 import ResumeButton from '../ResumeButton/ResumeButton';
+import { trackOutboundClick } from '../../services/analytics';
 import './Footer.css';
 
 const Footer = () => {
@@ -45,8 +46,8 @@ const Footer = () => {
         <div className="footer-col">
           <h4 className="footer-title">Follow KTP</h4>
           <div className="footer-socials">
-            <a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill">GitHub</a>
-            <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a>
+            <a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill" onClick={() => trackOutboundClick('https://github.com/kktpx', { platform: 'github', label: 'GitHub Footer' })}>GitHub</a>
+            <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill" onClick={() => trackOutboundClick('https://www.linkedin.com/in/kittipop-sanpho-7b734739b/', { platform: 'linkedin', label: 'LinkedIn Footer' })}>LinkedIn</a>
             <ResumeButton variant="pill" />
           </div>
         </div>

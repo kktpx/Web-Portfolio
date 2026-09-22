@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FolderOpen, LogOut, X } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, BarChart3, LogOut, X } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import './AdminSidebar.css';
 
@@ -47,6 +47,15 @@ const AdminSidebar = ({ isMobileOpen, onCloseMobile }) => {
         >
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
+        </NavLink>
+
+        <NavLink
+          to="/admin/analytics"
+          className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
+          onClick={onCloseMobile}
+        >
+          <BarChart3 size={20} />
+          <span>Analytics</span>
         </NavLink>
         
         <NavLink 

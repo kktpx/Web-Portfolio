@@ -1,13 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Section from '../common/Section';
 import { getPublishedProjects } from '../../services/projectService';
+import { trackProjectEvent, trackOutboundClick } from '../../services/analytics';
 import './PortfolioSection.css';
 
-const TiltCard = ({ children, className }) => {
+const TiltCard = ({ children, className, project }) => {
     const ref = useRef(null);
     useEffect(() => {
         const card = ref.current;
-        if (!card || window.matchMedia("(pointer: coarse)").matches) return;
+        if (!card) return;
+        
+        // Track project_view
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && project) {
+                        trackProjectEvent('project_view', project.id, { title: project.title });
+                        observer.unobserve(entry.target); // only once per visit
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+        observer.observe(card);
+
+        if (window.matchMedia("(pointer: coarse)").matches) return () => observer.disconnect();
 
         const handleMouseMove = (e) => {
             const rect = card.getBoundingClientRect();
@@ -26,10 +43,11 @@ const TiltCard = ({ children, className }) => {
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
         return () => {
+            observer.disconnect();
             card.removeEventListener('mousemove', handleMouseMove);
             card.removeEventListener('mouseleave', handleMouseLeave);
         };
-    }, []);
+    }, [project]);
     return (
         <div ref={ref} className={className} style={{ transition: 'transform 0.1s ease-out' }}>
             {children}
@@ -94,7 +112,7 @@ const PortfolioSection = () => {
                 {!loading && !error && projects.length > 0 && (
                     <div className="portfolio-grid">
                         {projects.map((project) => (
-                            <TiltCard key={project.id} className="project-card">
+                            <TiltCard key={project.id} className="project-card" project={project}>
                                 <div className="project-image">
                                     {project.image ? (
                                         <img src={project.image} alt={project.title} />
@@ -114,12 +132,22 @@ const PortfolioSection = () => {
                                     )}
                                     <div className="project-buttons">
                                         {project.liveUrl && (
-                                            <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer">
+                                            <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer"
+                                                onClick={() => {
+                                                    trackProjectEvent('demo_click', project.id, { title: project.title });
+                                                    trackOutboundClick(project.liveUrl, { platform: 'demo', label: project.title });
+                                                }}
+                                            >
                                                 Live
-                                            </a>
+                                             </a>
                                         )}
                                         {project.githubUrl && (
-                                            <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer">
+                                            <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer"
+                                                onClick={() => {
+                                                    trackProjectEvent('github_click', project.id, { title: project.title });
+                                                    trackOutboundClick(project.githubUrl, { platform: 'github', label: project.title });
+                                                }}
+                                            >
                                                 Github
                                             </a>
                                         )}
