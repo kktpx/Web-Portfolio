@@ -101,7 +101,7 @@ const AdminDashboard = () => {
         <div className="admin-card action-card">
           <h2>Portfolio Management</h2>
           <p>Add new projects, update existing ones, or manage visibility on the public site.</p>
-          <Link to="/admin/portfolio" className="admin-btn admin-btn-primary">
+          <Link to="/admin/projects" className="admin-btn admin-btn-primary">
             Manage Portfolio <ArrowRight size={18} />
           </Link>
         </div>

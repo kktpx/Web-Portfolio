@@ -1,9 +1,10 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PortfolioManager from './pages/admin/PortfolioManager'
+import ComingSoon from './pages/admin/ComingSoon'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import AdminLayout from './components/admin/AdminLayout'
 import './App.css'
@@ -25,7 +26,11 @@ function App() {
         }
       >
         <Route index element={<AdminDashboard />} />
-        <Route path="portfolio" element={<PortfolioManager />} />
+        <Route path="projects" element={<PortfolioManager />} />
+        <Route path="portfolio" element={<Navigate to="/admin/projects" replace />} />
+        <Route path="profile" element={<ComingSoon title="Profile" />} />
+        <Route path="contact" element={<ComingSoon title="Contact" />} />
+        <Route path="resume" element={<ComingSoon title="Resume" />} />
       </Route>
     </Routes>
   )
