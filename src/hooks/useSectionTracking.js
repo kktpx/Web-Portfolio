@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { trackEvent } from '../services/analyticsService';
 import { getVisitId } from '../utils/analytics';
+import { isSectionViewed } from '../utils/sectionViewed';
 
 const memoryFired = new Set();
 
@@ -48,7 +49,8 @@ export default function useSectionTracking(ids) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+          const vh = entry.rootBounds ? entry.rootBounds.height : window.innerHeight;
+          if (!isSectionViewed(entry, vh)) return;
           const id = entry.target.id;
           if (markFired(getVisitId(), id)) {
             trackEvent('section_view', { section: id });
@@ -56,7 +58,7 @@ export default function useSectionTracking(ids) {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.4 }
+      { threshold: [0, 0.4] }
     );
 
     const scan = () => {
