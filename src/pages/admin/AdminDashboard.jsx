@@ -9,6 +9,8 @@ import UtmTable from '../../components/admin/analytics/UtmTable';
 import GoalsPanel from '../../components/admin/analytics/GoalsPanel';
 import ProjectTable from '../../components/admin/analytics/ProjectTable';
 import TopActions from '../../components/admin/analytics/TopActions';
+import TopCountries from '../../components/admin/analytics/TopCountries';
+import VisitorJourneys from '../../components/admin/analytics/VisitorJourneys';
 import '../../components/admin/analytics/analytics.css';
 import './AdminDashboard.css';
 
@@ -53,7 +55,8 @@ const AdminDashboard = () => {
           <ProjectTable {...widgetProps} />
           <TopActions {...widgetProps} />
         </div>
-        {/* Task 8 widgets mount here */}
+        <TopCountries {...widgetProps} />
+        <VisitorJourneys refreshKey={refreshKey} />
       </div>
 
       <div className="admin-dashboard-actions">

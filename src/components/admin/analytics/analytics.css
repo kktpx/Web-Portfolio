@@ -70,3 +70,42 @@
   .an-grid-4, .an-goal-grid { grid-template-columns: minmax(0, 1fr); }
   .an-stat-value { font-size: 1.6rem; }
 }
+
+/* Countries */
+.an-country { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.an-country-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.an-flag { display: inline-block; border-radius: 2px; object-fit: cover; flex-shrink: 0; }
+.an-flag-globe { color: var(--admin-text-muted); flex-shrink: 0; }
+
+/* Visitor journeys */
+.an-journey-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; max-width: 100%; }
+.an-date { display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid var(--admin-border); border-radius: 999px; padding: 0.2rem 0.7rem; color: var(--admin-text-muted); }
+.an-date.active { border-color: var(--admin-accent); color: var(--admin-accent); }
+.an-date input { background: transparent; border: 0; color: var(--admin-text); font-size: 0.78rem; color-scheme: dark; min-width: 0; }
+.an-journey-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.an-journey { display: flex; flex-direction: column; gap: 0.7rem; padding: 0.9rem; border: 1px solid var(--admin-border); border-radius: 12px; min-width: 0; }
+.an-journey.highlight { border-color: var(--admin-accent); }
+.an-journey-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-size: 0.75rem; }
+.an-source { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.15rem 0.55rem; border-radius: 6px; border: 1px solid var(--admin-border); font-size: 0.75rem; font-weight: 600; }
+.an-journey.highlight .an-source { border-color: var(--admin-accent); color: var(--admin-accent); }
+.an-journey-stats { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; padding: 0.6rem 0.75rem; border-radius: 8px; background: rgba(255, 255, 255, 0.04); font-size: 0.85rem; }
+.an-journey-stats small { font-size: 0.62rem; letter-spacing: 0.05em; color: var(--admin-text-muted); margin-right: 0.3rem; }
+.an-journey-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.an-journey-meta code { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.45rem; border-radius: 5px; background: rgba(255, 255, 255, 0.06); font-size: 0.72rem; max-width: 100%; overflow-wrap: anywhere; }
+.an-link-btn { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--admin-accent); font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+.an-link-btn:hover { text-decoration: underline; }
+.an-link-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* Trail modal */
+.an-modal-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.an-modal { width: 100%; max-width: 520px; max-height: 85vh; overflow-y: auto; background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 14px; padding: 1.1rem 1.25rem; color: var(--admin-text); outline: none; }
+.an-modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; }
+.an-trail-meta { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
+.an-icon-btn { background: transparent; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 8px; padding: 0.3rem; cursor: pointer; display: inline-flex; }
+.an-trail { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.an-trail-item { display: flex; gap: 0.75rem; font-size: 0.85rem; padding-left: 0.75rem; border-left: 2px solid var(--admin-accent); }
+.an-trail-time { font-family: monospace; color: var(--admin-text-muted); flex-shrink: 0; }
+.an-trail-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 1100px) { .an-journey-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .an-journey-grid { grid-template-columns: minmax(0, 1fr); } }
