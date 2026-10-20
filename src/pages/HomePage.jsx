@@ -10,10 +10,16 @@ import Footer from '../components/Footer/Footer'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import PageLoader from '../components/PageLoader/PageLoader'
 import { trackEvent } from '../services/analyticsService'
+import useHeartbeat from '../hooks/useHeartbeat'
+import useSectionTracking from '../hooks/useSectionTracking'
+
+const SECTION_IDS = ['home', 'about', 'skills', 'portfolio', 'github-stats', 'contact'];
 
 function HomePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const tracked = useRef(false);
+  useHeartbeat();
+  useSectionTracking(SECTION_IDS);
 
   useEffect(() => {
     if (!tracked.current) {
