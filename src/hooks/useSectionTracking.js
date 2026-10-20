@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { trackEvent } from '../services/analyticsService';
 import { getVisitId } from '../utils/analytics';
-import { isSectionViewed } from '../utils/sectionViewed';
+import { isSectionViewed, SECTION_THRESHOLDS } from '../utils/sectionViewed';
 
 const memoryFired = new Set();
 
@@ -58,7 +58,7 @@ export default function useSectionTracking(ids) {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: [0, 0.4] }
+      { threshold: SECTION_THRESHOLDS }
     );
 
     const scan = () => {
