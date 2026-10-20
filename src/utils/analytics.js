@@ -32,7 +32,8 @@ const VISIT_KEY = 'portfolio_visit';
 const UTM_KEY = 'portfolio_utm';
 const VISIT_TTL_MS = 30 * 60 * 1000;
 const UTM_MAX_LEN = 100;
-const memoryStore = new Map();
+const defaultMemory = new Map();
+const memoryByStorage = new WeakMap();
 
 function resolveStorage(storage) {
   if (storage) return storage;
@@ -44,14 +45,27 @@ function resolveStorage(storage) {
   return null;
 }
 
+// In-memory fallback, scoped per storage object so instances never leak into each other.
+function memoryFor(storage) {
+  const s = resolveStorage(storage);
+  if (!s) return defaultMemory;
+  let m = memoryByStorage.get(s);
+  if (!m) {
+    m = new Map();
+    memoryByStorage.set(s, m);
+  }
+  return m;
+}
+
 function readJson(storage, key) {
   let raw = null;
   try {
     const s = resolveStorage(storage);
-    raw = s ? s.getItem(key) : memoryStore.get(key) ?? null;
+    if (s) raw = s.getItem(key);
   } catch {
-    raw = memoryStore.get(key) ?? null;
+    raw = null;
   }
+  if (!raw) raw = memoryFor(storage).get(key) ?? null;
   if (!raw) return null;
   try {
     return JSON.parse(raw);
@@ -62,7 +76,7 @@ function readJson(storage, key) {
 
 function writeJson(storage, key, value) {
   const raw = JSON.stringify(value);
-  memoryStore.set(key, raw);
+  memoryFor(storage).set(key, raw);
   try {
     const s = resolveStorage(storage);
     if (s) s.setItem(key, raw);

@@ -73,3 +73,18 @@ test('getUtm keeps first UTM within a visit and replaces on a new visit', () => 
   const empty = getUtm(T0 + 120 * MIN, s, '');
   assert.equal(empty.utm_source, null);
 });
+
+test('getVisitId is stable when getItem returns null but setItem throws', () => {
+  const bad = { getItem: () => null, setItem() { throw new Error('quota'); } };
+  const a = getVisitId(T0, bad);
+  assert.equal(getVisitId(T0 + MIN, bad), a);
+});
+
+test('getVisitId boundary: exactly 30:00 keeps id, +1 ms changes it', () => {
+  const s = memStorage();
+  const a = getVisitId(T0, s);
+  assert.equal(getVisitId(T0 + 30 * MIN, s), a);
+  const s2 = memStorage();
+  const b = getVisitId(T0, s2);
+  assert.notEqual(getVisitId(T0 + 30 * MIN + 1, s2), b);
+});
