@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import RangeBar from '../../components/admin/analytics/RangeBar';
 import { computeRange } from '../../components/admin/analytics/range';
+import OverviewCards from '../../components/admin/analytics/OverviewCards';
+import ActivityTimeline from '../../components/admin/analytics/ActivityTimeline';
+import UtmTable from '../../components/admin/analytics/UtmTable';
+import GoalsPanel from '../../components/admin/analytics/GoalsPanel';
+import ProjectTable from '../../components/admin/analytics/ProjectTable';
+import TopActions from '../../components/admin/analytics/TopActions';
+import '../../components/admin/analytics/analytics.css';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -12,6 +19,8 @@ const AdminDashboard = () => {
   // Recomputed only when range or refreshKey changes. Pass { from, to, refreshKey } to widgets.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { from, to } = useMemo(() => computeRange(range), [range, refreshKey]);
+
+  const widgetProps = { from, to, refreshKey };
 
   return (
     <div className="admin-page-container">
@@ -33,8 +42,17 @@ const AdminDashboard = () => {
         />
       </div>
 
-      <div className="analytics-widgets" data-from={from} data-to={to}>
-        {/* Task 7 widgets mount here */}
+      <div className="analytics-widgets">
+        <OverviewCards {...widgetProps} />
+        <ActivityTimeline {...widgetProps} />
+        <div className="an-grid-2">
+          <UtmTable {...widgetProps} />
+          <GoalsPanel {...widgetProps} />
+        </div>
+        <div className="an-grid-2">
+          <ProjectTable {...widgetProps} />
+          <TopActions {...widgetProps} />
+        </div>
         {/* Task 8 widgets mount here */}
       </div>
 
