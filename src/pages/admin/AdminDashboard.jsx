@@ -1,107 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { getAnalyticsSummary, getAnalyticsByDate, getTopProjects, getEventBreakdown } from '../../services/analyticsService';
-import AnalyticsCards from '../../components/admin/AnalyticsCards';
-import AnalyticsChart from '../../components/admin/AnalyticsChart';
-import TopProjects from '../../components/admin/TopProjects';
-import EventBreakdown from '../../components/admin/EventBreakdown';
+import RangeBar from '../../components/admin/analytics/RangeBar';
+import { computeRange } from '../../components/admin/analytics/range';
+import OverviewCards from '../../components/admin/analytics/OverviewCards';
+import ActivityTimeline from '../../components/admin/analytics/ActivityTimeline';
+import UtmTable from '../../components/admin/analytics/UtmTable';
+import GoalsPanel from '../../components/admin/analytics/GoalsPanel';
+import ProjectTable from '../../components/admin/analytics/ProjectTable';
+import TopActions from '../../components/admin/analytics/TopActions';
+import TopCountries from '../../components/admin/analytics/TopCountries';
+import VisitorJourneys from '../../components/admin/analytics/VisitorJourneys';
+import '../../components/admin/analytics/analytics.css';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-  const [dateRange, setDateRange] = useState(7); // 7, 30, or null (all time)
-  const [analytics, setAnalytics] = useState(null);
-  const [chartData, setChartData] = useState([]);
-  const [topProjects, setTopProjects] = useState([]);
-  const [eventBreakdown, setEventBreakdown] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [range, setRange] = useState(7);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [dateRange]);
+  // Recomputed only when range or refreshKey changes. Pass { from, to, refreshKey } to widgets.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { from, to } = useMemo(() => computeRange(range), [range, refreshKey]);
 
-  const loadAnalytics = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const [summaryData, dailyData, projectsData, breakdownData] = await Promise.all([
-        getAnalyticsSummary(dateRange),
-        getAnalyticsByDate(dateRange),
-        getTopProjects(dateRange),
-        getEventBreakdown(dateRange)
-      ]);
-
-      setAnalytics(summaryData);
-      setChartData(dailyData);
-      setTopProjects(projectsData);
-      setEventBreakdown(breakdownData);
-    } catch (err) {
-      console.error('Failed to load analytics:', err);
-      setError('Unable to load analytics data.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const widgetProps = { from, to, refreshKey };
 
   return (
     <div className="admin-page-container">
-      <div className="admin-page-header">
-        <h1 className="admin-page-title">Analytics Dashboard</h1>
-        
-        <div className="analytics-date-filter">
-          <button 
-            className={`filter-btn ${dateRange === 7 ? 'active' : ''}`}
-            onClick={() => setDateRange(7)}
-          >
-            7 Days
-          </button>
-          <button 
-            className={`filter-btn ${dateRange === 30 ? 'active' : ''}`}
-            onClick={() => setDateRange(30)}
-          >
-            30 Days
-          </button>
-          <button 
-            className={`filter-btn ${dateRange === null ? 'active' : ''}`}
-            onClick={() => setDateRange(null)}
-          >
-            All Time
-          </button>
+      <div className="analytics-header">
+        <div>
+          <div className="analytics-eyebrow">
+            <span>BEHAVIORAL &amp; CONVERSION ANALYTICS</span>
+            <span className="analytics-live-pill">Live Sync</span>
+          </div>
+          <h1 className="admin-page-title">Portfolio Analytics</h1>
+          <p className="analytics-subtitle">
+            How visitors find, explore and convert on your portfolio.
+          </p>
         </div>
+        <RangeBar
+          range={range}
+          onChange={setRange}
+          onRefresh={() => setRefreshKey((k) => k + 1)}
+        />
       </div>
 
-      {error && (
-        <div className="analytics-error-state">
-          <p>{error}</p>
-          <button className="admin-btn admin-btn-secondary" onClick={loadAnalytics}>Retry</button>
+      <div className="analytics-widgets">
+        <OverviewCards {...widgetProps} />
+        <ActivityTimeline {...widgetProps} />
+        <div className="an-grid-2">
+          <UtmTable {...widgetProps} />
+          <GoalsPanel {...widgetProps} />
         </div>
-      )}
-
-      {!error && !loading && (!analytics || analytics.pageViews === 0) && (
-        <div className="analytics-empty-state">
-          <p>No analytics data available yet. Events will appear here once visitors start interacting with your portfolio.</p>
+        <div className="an-grid-2">
+          <ProjectTable {...widgetProps} />
+          <TopActions {...widgetProps} />
         </div>
-      )}
-
-      {(!error && (loading || (analytics && analytics.pageViews > 0))) && (
-        <>
-          <AnalyticsCards data={analytics} loading={loading} />
-          
-          <AnalyticsChart data={chartData} loading={loading} />
-          
-          <div className="analytics-grid-2col">
-            <TopProjects data={topProjects} loading={loading} />
-            <EventBreakdown data={eventBreakdown} loading={loading} />
-          </div>
-        </>
-      )}
+        <TopCountries {...widgetProps} />
+        <VisitorJourneys refreshKey={refreshKey} />
+      </div>
 
       <div className="admin-dashboard-actions">
         <div className="admin-card action-card">
           <h2>Portfolio Management</h2>
           <p>Add new projects, update existing ones, or manage visibility on the public site.</p>
-          <Link to="/admin/portfolio" className="admin-btn admin-btn-primary">
+          <Link to="/admin/projects" className="admin-btn admin-btn-primary">
             Manage Portfolio <ArrowRight size={18} />
           </Link>
         </div>

@@ -125,7 +125,7 @@ const ContactSection = () => {
                     <div className="contact-card contact-card--details">
                         <h3 className="card-title">Connect With Me</h3>
                         <div className="contact-details">
-                            <a className="detail-item">
+                            <a className="detail-item" href="mailto:kittipop.sanpho@gmail.com" onClick={() => trackEvent('contact_click')}>
                                 <div className="detail-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -165,10 +165,10 @@ const ContactSection = () => {
                         <div className="social-section">
                             <span className="social-label">Follow Me</span>
                             <div className="social-icons">
-                                <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noopener noreferrer" className="social-icon-link" onClick={() => trackEvent('social_click')}>
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
                                 </a>
-                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                                <a href="https://github.com/kktpx" target="_blank" rel="noopener noreferrer" className="social-icon-link" onClick={() => trackEvent('social_click')}>
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
                                 </a>
                             </div>

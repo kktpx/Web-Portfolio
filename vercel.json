@@ -1,7 +1,15 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/(.*)",
+      "has": [{ "type": "host", "value": "kktp.my" }],
+      "destination": "https://www.kktp.my/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
