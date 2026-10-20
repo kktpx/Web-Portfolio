@@ -142,3 +142,12 @@ export function getUtm(now = Date.now(), storage, search) {
   writeJson(storage, UTM_KEY, { visitId, utm });
   return utm;
 }
+
+/**
+ * True only if a stored visit exists and is still within the 30 min window.
+ * Read-only: never refreshes last-activity and never creates a visit.
+ */
+export function hasActiveVisit(now = Date.now(), storage) {
+  const v = readJson(storage, VISIT_KEY);
+  return !!(v && v.id && typeof v.last === 'number' && now - v.last <= VISIT_TTL_MS);
+}

@@ -18,7 +18,9 @@ export default async function handler(req, res) {
     return res.status(405).end();
   }
 
-  const { raw, parsed, size } = readBody(req);
+  let read;
+  try { read = readBody(req); } catch { return res.status(400).end(); }
+  const { raw, parsed, size } = read;
   if ((raw !== undefined ? raw.length : size) > MAX_BODY) return res.status(413).end();
 
   let body = parsed;

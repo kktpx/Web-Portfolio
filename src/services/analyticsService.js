@@ -9,6 +9,7 @@ const DEDUP_MS = 2000;
  */
 export function trackEvent(eventType, options = {}) {
   try {
+    if (import.meta.env?.DEV && !import.meta.env?.VITE_TRACK_IN_DEV) return;
     const dedupKey = `${eventType}:${options.projectId || ''}:${options.pagePath || ''}:${options.section || ''}`;
     const now = Date.now();
     if (recentEvents.has(dedupKey) && now - recentEvents.get(dedupKey) < DEDUP_MS) return;
