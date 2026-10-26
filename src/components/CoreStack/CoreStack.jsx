@@ -49,7 +49,7 @@ const CoreStack = () => (
     <div id="skills" className="core-stack-card">
         <div className="skills-header">
             <CodeXml size={26} className="skills-title-icon" />
-            <h2 className="skills-title">Core <span className="highlight-yellow">Stack</span></h2>
+            <h3 className="skills-title">Core <span className="highlight-yellow">Stack</span></h3>
         </div>
         <div className="marquee-container">
             {skillRows.map((row, rowIndex) => (
