@@ -3,16 +3,8 @@
     width: 100%;
 }
 
-.contact-main-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-align: center;
-    margin: 0 0 2.5rem 0;
-}
-
-.contact-main-title .highlight {
-    color: #ffcc00;
+.contact-section {
+    margin-bottom: 100px;
 }
 
 .contact-grid {
@@ -38,19 +30,12 @@
     justify-content: space-between;
 }
 
-.card-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffcc00;
-    margin: 0 0 1.5rem 0;
-    text-align: center;
-}
-
 /* Form Styles */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    flex: 1;
 }
 
 .form-input,
@@ -78,7 +63,8 @@
 
 .form-textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
+    flex: 1;
 }
 
 .submit-btn {
@@ -208,10 +194,6 @@
     border-top: 1px solid #333;
 }
 
-.resume-section {
-    margin-top: 2rem;
-}
-
 .social-label {
     display: block;
     font-size: 0.8rem;
@@ -271,10 +253,12 @@
         transform: none;
     }
 }
-@media (max-width: 480px) {
-    .contact-main-title {
-        font-size: 1.5rem;
+@media (max-width: 768px) {
+    .contact-section {
+        margin-bottom: 72px;
     }
+}
+@media (max-width: 480px) {
     .contact-card {
         padding: 1.2rem;
         border-radius: 20px;

@@ -3,29 +3,6 @@
     width: 100%;
 }
 
-.portfolio-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.portfolio-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 0.8rem 0;
-}
-
-.portfolio-title .highlight {
-    color: #ffcc00;
-}
-
-.title-underline {
-    width: 80px;
-    height: 3px;
-    background-color: #ffcc00;
-    margin: 0 auto;
-}
-
 /* Uniform grid: 3 columns, orphan cards in the last row centered */
 .portfolio-grid {
     --grid-gap: 1.25rem;
@@ -179,7 +156,7 @@ button.project-image:focus-visible .project-image-badge {
     color: var(--text-secondary);
     background-color: transparent;
     transition: all 0.3s ease;
-    font-family: monospace;
+    font-family: var(--font-mono);
 }
 
 .tech-tag:hover {
@@ -189,43 +166,44 @@ button.project-image:focus-visible .project-image-badge {
 
 .project-buttons {
     display: flex;
-    gap: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 1.1rem;
 }
 
 .btn {
-    flex: 1;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #3a3a3a;
+    background: transparent;
+    color: #e5e5e5;
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    text-align: center;
-    transition: all 0.3s ease;
+    transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
-.btn-live {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #333;
+.btn svg {
+    flex-shrink: 0;
 }
 
-.btn-live:hover {
+.btn-live:hover,
+.btn-live:focus-visible {
     background-color: #ffcc00;
+    border-color: #ffcc00;
     color: #000;
-    border-color: #ffcc00;
+    outline: none;
 }
 
-.btn-github {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #333;
-}
-
-.btn-github:hover {
-    background-color: #333;
+.btn-github:hover,
+.btn-github:focus-visible {
     border-color: #ffcc00;
+    color: #ffcc00;
+    outline: none;
 }
 
 /* Lightbox */
