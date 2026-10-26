@@ -79,10 +79,6 @@ const HeroSection = () => {
             <canvas ref={canvasRef} className="hero-particles" />
             <div className="hero-container">
                 <div className="hero-content">
-                    <span className="hero-badge">
-                        <span className="hero-badge-dot" aria-hidden="true"></span>
-                        Open to internship 2026
-                    </span>
                     <p className="greeting">Hello World, I'm</p>
                     <h1 className="name">Kittipop Sanpho</h1>
                     <TextType
