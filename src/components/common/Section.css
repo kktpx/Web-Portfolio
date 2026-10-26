@@ -18,13 +18,14 @@
 
 .section--first {
     margin-top: 80px;
-    height: calc(100vh - 80px);
+    min-height: calc(88vh - 80px);
+    min-height: calc(88svh - 80px);
     display: flex;
     align-items: center;
 }
 
 .section--gap {
-    margin-bottom: 190px;
+    margin-bottom: 140px;
 }
 
 @media (max-width: 1200px) {
@@ -39,7 +40,7 @@
     }
 
     .section--gap {
-        margin-bottom: 120px;
+        margin-bottom: 110px;
     }
 }
 @media (max-width: 480px) {
@@ -61,7 +62,7 @@
 .section--gap::after {
     content: '';
     position: absolute;
-    bottom: -75px; 
+    bottom: -70px;
     left: 50%;
     transform: translateX(-50%);
     width: 70%;
