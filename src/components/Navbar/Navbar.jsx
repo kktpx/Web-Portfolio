@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ResumeButton from '../ResumeButton/ResumeButton';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -101,6 +102,9 @@ const Navbar = () => {
                             <a href={"#" + item.id} onClick={closeMenu}>{item.label}</a>
                         </li>
                     ))}
+                    <li className="nav-resume">
+                        <ResumeButton variant="nav" />
+                    </li>
                 </ul>
 
                 {/* Overlay for mobile menu */}

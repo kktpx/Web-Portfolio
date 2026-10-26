@@ -4,7 +4,7 @@
   display: inline-block;
 }
 
-/* Default variant (ContactSection) */
+/* Default variant */
 .resume-btn--default .resume-btn {
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
   color: #000;
 }
 
-/* Pill variant (Footer) */
+/* Pill variant */
 .resume-btn--pill .resume-btn {
   display: flex;
   align-items: center;
@@ -101,6 +101,39 @@
 .resume-dropdown a:not(:last-child) {
   border-bottom: 1px solid #333;
 }
+/* Nav variant (Navbar) */
+.resume-btn--nav .resume-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(255, 204, 0, 0.6);
+  border-radius: 999px;
+  background: transparent;
+  color: #ffcc00;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.resume-btn--nav .resume-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.resume-btn--nav .resume-btn:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+.resume-btn--nav .resume-dropdown {
+  bottom: auto;
+  top: calc(100% + 10px);
+  animation: fadeInDown 0.2s ease;
+}
+
 /* Secondary variant (HeroSection) */
 .resume-btn--secondary .resume-btn {
   display: flex;
