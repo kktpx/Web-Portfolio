@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ResumeButton from '../ResumeButton/ResumeButton';
 import './Footer.css';
+
+const MENU_LINKS = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#github-stats', label: 'GitHub' },
+  { href: '#portfolio', label: 'Portfolio' },
+  { href: '#contact', label: 'Contact' },
+];
 
 const Footer = () => {
   return (
@@ -21,34 +29,22 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Column 2: Main Menu */}
+        {/* Column 2: Menu */}
         <div className="footer-col">
-          <h4 className="footer-title">Main Menu</h4>
-          <ul className="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <h4 className="footer-title">Menu</h4>
+          <ul className="footer-links footer-links--grid">
+            {MENU_LINKS.map(({ href, label }) => (
+              <li key={href}><a href={href}>{label}</a></li>
+            ))}
           </ul>
         </div>
 
-        {/* Column 3: Sections */}
-        <div className="footer-col">
-          <h4 className="footer-title">Sections</h4>
-          <ul className="footer-links">
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#github">Github</a></li>
-            
-          </ul>
-        </div>
-
-        {/* Column 4: Follow KTP */}
+        {/* Column 3: Follow KTP */}
         <div className="footer-col">
           <h4 className="footer-title">Follow KTP</h4>
           <div className="footer-socials">
             <a href="https://github.com/kktpx" target="_blank" rel="noreferrer" className="social-pill">GitHub</a>
             <a href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a>
-            <ResumeButton variant="pill" />
           </div>
         </div>
 

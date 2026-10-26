@@ -1,3 +1,8 @@
+.about-container {
+    max-width: 1100px;
+    width: 100%;
+}
+
 .about-card {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
@@ -14,13 +19,6 @@
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
-}
-
-.about-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 1.5rem 0;
 }
 
 .about-paragraph {
@@ -106,9 +104,6 @@
     .about-card {
         padding: 1.5rem;
         border-radius: 20px;
-    }
-    .about-title {
-        font-size: 1.8rem;
     }
     .about-paragraph {
         font-size: 0.95rem;

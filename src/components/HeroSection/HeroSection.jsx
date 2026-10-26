@@ -1,6 +1,7 @@
 ﻿import React, { useEffect, useRef } from 'react';
-import { Download } from 'lucide-react';
 import Section from '../common/Section';
+import { GithubIcon, LinkedinIcon } from '../common/BrandIcons';
+import { trackEvent } from '../../services/analyticsService';
 import ElectricBorder from '../ElectricBorder/ElectricBorder';
 import TextType from '../TextType/TextType';
 import ResumeButton from '../ResumeButton/ResumeButton';
@@ -90,10 +91,34 @@ const HeroSection = () => {
                         cursorCharacter="|"
                         loop={true}
                     />
-                    <p className="tagline">Building elegant digital experiences with modern technologies</p>
+                    <p className="tagline">
+                        Building web apps and AI tools with React &amp; FastAPI.
+                    </p>
                     <div className="hero-cta">
                         <a href="#portfolio" className="cta-btn cta-primary">View My Work</a>
                         <ResumeButton variant="secondary" />
+                    </div>
+                    <div className="hero-socials">
+                        <a
+                            href="https://github.com/kktpx"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hero-social"
+                            aria-label="GitHub"
+                            onClick={() => trackEvent('social_click')}
+                        >
+                            <GithubIcon size={20} />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/kittipop-sanpho-7b734739b/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hero-social"
+                            aria-label="LinkedIn"
+                            onClick={() => trackEvent('social_click')}
+                        >
+                            <LinkedinIcon size={20} />
+                        </a>
                     </div>
                 </div>
                 <div className="hero-image">

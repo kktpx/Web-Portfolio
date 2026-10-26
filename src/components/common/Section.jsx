@@ -20,7 +20,7 @@ const Section = ({ id, className = '', isFirst = false, hasGap = true, children 
         }
 
         const staggerElements = sectionRef.current.querySelectorAll(
-            '.about-left, .about-education, .about-skills, .project-card, .contact-card, .skills-header, .marquee-track-container, .stat-card, .calendar-card, .hero-content > *, .profile-circle, .github-header'
+            '.section-heading, .about-left, .about-education, .about-skills, .project-card, .contact-card, .skills-header, .marquee-track-container, .stat-card, .calendar-card, .hero-content > *, .profile-circle, .github-header'
         );
 
         if (isFirst) {
@@ -54,7 +54,7 @@ const Section = ({ id, className = '', isFirst = false, hasGap = true, children 
             );
 
             // Title glow effect
-            const titles = sectionRef.current.querySelectorAll('.portfolio-title, .skills-title, .contact-main-title, .about-title');
+            const titles = sectionRef.current.querySelectorAll('.section-heading-title .highlight');
             if (titles.length > 0) {
                 gsap.fromTo(titles,
                     { textShadow: "0px 0px 0px rgba(255,204,0,0)" },

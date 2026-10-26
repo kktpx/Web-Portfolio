@@ -2,7 +2,7 @@
   position: relative;
   background-color: #0c0c0c;
   color: rgba(255, 255, 255, 0.87);
-  padding: 5rem 2rem 0;
+  padding: 4rem 2rem 0;
   overflow: hidden;
   font-family: inherit;
   border-top: 1px solid #1f1f1f;
@@ -26,7 +26,7 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.6fr 1.4fr 1fr;
   gap: 2.5rem;
   padding-bottom: 4rem;
 }
@@ -81,6 +81,12 @@
 
 .footer-links li {
   margin-bottom: 1.2rem;
+}
+
+.footer-links--grid {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 3rem;
 }
 
 .footer-links a {

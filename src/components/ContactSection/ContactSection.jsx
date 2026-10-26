@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Section from '../common/Section';
-import ResumeButton from '../ResumeButton/ResumeButton';
+import SectionHeading from '../common/SectionHeading';
 import { trackEvent } from '../../services/analyticsService';
 import './ContactSection.css';
 
@@ -50,14 +50,15 @@ const ContactSection = () => {
 
 
     return (
-        <Section id="contact" className="contact-section" hasGap={true}>
+        <Section id="contact" className="contact-section" hasGap={false}>
             <div className="contact-container">
-                <h2 className="contact-main-title">Contact <span className="highlight">Me</span></h2>
+                <SectionHeading index="04" label="Contact">
+                    Get in <span className="highlight">touch</span>
+                </SectionHeading>
 
                 <div className="contact-grid">
-                    {/* Left Side - Form Card (Original Style) */}
+                    {/* Left Side - Form Card */}
                     <div className="contact-card">
-                        <h3 className="card-title">Send a Message</h3>
                         <form onSubmit={handleSubmit} className="contact-form">
                             <input
                                 type="text"
@@ -123,7 +124,6 @@ const ContactSection = () => {
 
                     {/* Right Side - Contact Details */}
                     <div className="contact-card contact-card--details">
-                        <h3 className="card-title">Connect With Me</h3>
                         <div className="contact-details">
                             <a className="detail-item" href="mailto:kittipop.sanpho@gmail.com" onClick={() => trackEvent('contact_click')}>
                                 <div className="detail-icon">
@@ -172,11 +172,6 @@ const ContactSection = () => {
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="github-icon" />
                                 </a>
                             </div>
-                        </div>
-
-                        <div className="resume-section">
-                            <span className="social-label">Download Resume</span>
-                            <ResumeButton variant="default" />
                         </div>
                     </div>
                 </div>

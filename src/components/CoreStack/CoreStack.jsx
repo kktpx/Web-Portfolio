@@ -38,7 +38,7 @@ const skills = [
     { name: "Render", logo: simple("render", "FFFFFF") },
 ];
 
-const ROW_COUNT = 4;
+const ROW_COUNT = 5;
 const ROW_SIZE = Math.ceil(skills.length / ROW_COUNT);
 const skillRows = Array.from({ length: ROW_COUNT }, (_, i) =>
     skills.slice(i * ROW_SIZE, (i + 1) * ROW_SIZE),
@@ -48,8 +48,13 @@ const skillRows = Array.from({ length: ROW_COUNT }, (_, i) =>
 const CoreStack = () => (
     <div id="skills" className="core-stack-card">
         <div className="skills-header">
-            <CodeXml size={26} className="skills-title-icon" />
-            <h2 className="skills-title">Core <span className="highlight-yellow">Stack</span></h2>
+            <div className="skills-icon-wrapper">
+                <CodeXml size={22} className="skills-title-icon" />
+            </div>
+            <div className="skills-header-text">
+                <h3 className="skills-title">Core Stack</h3>
+                <p className="skills-subtitle">{skills.length} technologies I build with</p>
+            </div>
         </div>
         <div className="marquee-container">
             {skillRows.map((row, rowIndex) => (

@@ -1,6 +1,31 @@
 .hero-section {
     color: #ffffff;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.hero-socials {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.hero-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    color: #a0a0a0;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-social:hover,
+.hero-social:focus-visible {
+    color: #ffcc00;
+    border-color: #ffcc00;
+    transform: translateY(-3px);
+    outline: none;
 }
 
 .hero-container {
@@ -131,7 +156,8 @@
     transform: translateY(-3px);
 }
 @media (max-width: 968px) {
-    .hero-cta {
+    .hero-cta,
+    .hero-socials {
         justify-content: center;
     }
 }

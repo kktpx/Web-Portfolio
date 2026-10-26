@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import Section from '../common/Section';
+import SectionHeading from '../common/SectionHeading';
+import { GithubIcon } from '../common/BrandIcons';
 import { getPublishedProjects } from '../../services/projectService';
 import { trackEvent } from '../../services/analyticsService';
 import ProjectLightbox from './ProjectLightbox';
@@ -61,12 +64,9 @@ const PortfolioSection = () => {
     return (
         <Section id="portfolio" className="portfolio-section" hasGap={true}>
             <div className="portfolio-container">
-                <div className="portfolio-header">
-                    <h2 className="portfolio-title">
-                        Portfolio <span className="highlight">Showcase</span>
-                    </h2>
-                    <div className="title-underline"></div>
-                </div>
+                <SectionHeading index="03" label="Work">
+                    Portfolio <span className="highlight">Showcase</span>
+                </SectionHeading>
 
                 {loading && (
                     <div className="portfolio-loading">
@@ -119,12 +119,14 @@ const PortfolioSection = () => {
                                     <div className="project-buttons">
                                         {project.liveUrl && (
                                             <a href={project.liveUrl} className="btn btn-live" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('demo_click', { projectId: project.id })}>
+                                                <ArrowUpRight size={16} aria-hidden="true" />
                                                 Live
                                             </a>
                                         )}
                                         {project.githubUrl && (
                                             <a href={project.githubUrl} className="btn btn-github" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('github_click', { projectId: project.id })}>
-                                                Github
+                                                <GithubIcon size={15} />
+                                                GitHub
                                             </a>
                                         )}
                                     </div>

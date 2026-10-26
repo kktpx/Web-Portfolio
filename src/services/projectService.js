@@ -11,6 +11,15 @@ export async function getPublishedProjects() {
   return data;
 }
 
+export async function getPublishedProjectCount() {
+  const { count, error } = await supabase
+    .from('portfolio_projects')
+    .select('id', { count: 'exact', head: true })
+    .eq('is_published', true);
+  if (error) throw error;
+  return count ?? 0;
+}
+
 // ─── Admin ──────────────────────────────────────────
 export async function getAllProjects() {
   const { data, error } = await supabase

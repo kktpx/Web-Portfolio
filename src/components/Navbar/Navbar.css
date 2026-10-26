@@ -3,44 +3,99 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
-    background-color: rgba(15, 15, 15, 0.95);
     display: flex;
-    align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 0 2rem;
     box-sizing: border-box;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+    pointer-events: none; /* only the bar itself is clickable */
 }
 
-/* Blur effect when scrolled */
-.navbar--scrolled {
-    background-color: rgba(15, 15, 15, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+/* Reading progress along the top edge of the viewport */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 1;
+    pointer-events: none;
 }
 
+/* Full-width transparent bar at the top; floating glass pill once scrolled */
 .navbar-container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1200px;
+    height: 72px;
+    margin-top: 0;
+    padding: 0;
+    pointer-events: auto;
+    transition: max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        margin-top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        padding 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Background lives on a pseudo-element: backdrop-filter on the container
+   itself would turn it into the containing block for the fixed mobile drawer. */
+.navbar-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 999px;
+    background: rgba(18, 18, 18, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.navbar--scrolled .navbar-container {
+    max-width: 880px;
+    height: 56px;
+    margin-top: 12px;
+    padding: 0 0.5rem 0 1.4rem;
+}
+
+.navbar--scrolled .navbar-container::before {
+    opacity: 1;
+}
+
+.navbar-logo {
+    text-decoration: none;
 }
 
 .navbar-logo .logo-text {
     color: #ffcc00;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    transition: font-size 0.35s ease, text-shadow 0.3s ease;
+}
+
+.navbar-logo:hover .logo-text {
+    text-shadow: 0 0 18px rgba(255, 204, 0, 0.5);
+}
+
+.navbar--scrolled .navbar-logo .logo-text {
+    font-size: 1.35rem;
 }
 
 .navbar-links {
     display: flex;
+    align-items: center;
     list-style: none;
-    gap: 2.5rem;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
     position: relative;
@@ -48,7 +103,7 @@
 
 .nav-indicator {
     position: absolute;
-    bottom: 0;
+    bottom: -6px;
     left: 0;
     height: 2px;
     background-color: #ffcc00;
@@ -64,20 +119,26 @@
 }
 
 .nav-item a {
+    position: relative;
     text-decoration: none;
-    color: #ffffff;
-    font-size: 1.1rem;
+    color: #d4d4d4;
+    font-size: 0.95rem;
     font-weight: 500;
-    transition: color 0.3s ease;
-    padding-bottom: 5px;
+    transition: color 0.25s ease;
 }
 
-.nav-item a:hover {
-    color: #ffcc00;
+.nav-item a:hover,
+.nav-item a:focus-visible {
+    color: #ffffff;
 }
 
 .nav-item.active a {
     color: #ffcc00;
+}
+
+.nav-resume {
+    display: flex;
+    margin-left: 0.25rem;
 }
 
 /* Hamburger Menu Button */
@@ -86,7 +147,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     width: 40px;
     height: 40px;
     background: transparent;
@@ -97,8 +158,8 @@
 }
 
 .hamburger-line {
-    width: 28px;
-    height: 3px;
+    width: 24px;
+    height: 2px;
     background-color: #ffffff;
     border-radius: 2px;
     transition: all 0.3s ease;
@@ -106,7 +167,7 @@
 
 /* Hamburger animation when active */
 .hamburger--active .hamburger-line:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger--active .hamburger-line:nth-child(2) {
@@ -114,7 +175,7 @@
 }
 
 .hamburger--active .hamburger-line:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Overlay */
@@ -128,6 +189,10 @@
         display: flex;
     }
 
+    .navbar--scrolled .navbar-container {
+        padding: 0 0.5rem 0 1.25rem;
+    }
+
     .navbar-links {
         position: fixed;
         top: 0;
@@ -135,13 +200,15 @@
         width: 70%;
         max-width: 300px;
         height: 100vh;
-        background-color: rgba(15, 15, 15, 0.95);
+        height: 100dvh;
+        background-color: rgba(15, 15, 15, 0.96);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2.5rem;
+        gap: 2.25rem;
         transition: right 0.4s ease;
         z-index: 1001;
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
@@ -151,12 +218,16 @@
         right: 0;
     }
 
-    .nav-item a {
-        font-size: 1.3rem;
+    .nav-indicator {
+        display: none;
     }
 
-    .navbar-logo .logo-text {
-        font-size: 1.5rem;
+    .nav-item a {
+        font-size: 1.25rem;
+    }
+
+    .nav-resume {
+        margin-left: 0;
     }
 
     .menu-overlay {
@@ -173,29 +244,28 @@
 
 @media (max-width: 480px) {
     .navbar {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
+    }
+
+    .navbar-container {
+        height: 64px;
+    }
+
+    .navbar--scrolled .navbar-container {
+        height: 52px;
+        margin-top: 8px;
     }
 
     .navbar-links {
         width: 80%;
     }
-}.nav-item a {
-    position: relative;
 }
 
-.lang-switcher {
-    background: transparent;
-    border: 1px solid #ffcc00;
-    color: #ffcc00;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.85rem;
-}
-
-.lang-switcher:hover {
-    background: #ffcc00;
-    color: #000;
+@media (prefers-reduced-motion: reduce) {
+    .navbar-container,
+    .navbar-container::before,
+    .navbar-logo .logo-text,
+    .navbar-links {
+        transition: none;
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 const ProjectLightbox = ({ project, onClose }) => {
     const closeRef = useRef(null);
@@ -22,7 +23,9 @@ const ProjectLightbox = ({ project, onClose }) => {
 
     if (!project) return null;
 
-    return (
+    // Portal to <body>: Section's GSAP transform would otherwise become the
+    // containing block for this fixed overlay and push it off-screen.
+    return createPortal(
         <div
             className="lightbox"
             role="dialog"
@@ -37,7 +40,8 @@ const ProjectLightbox = ({ project, onClose }) => {
                 <img src={project.image} alt={project.title} />
                 <figcaption>{project.title}</figcaption>
             </figure>
-        </div>
+        </div>,
+        document.body
     );
 };
 
