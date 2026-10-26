@@ -276,8 +276,35 @@
   min-width: 0;
 }
 
-@media (max-width: 768px) {
-  .github-main .stats-column {
-    flex-direction: column;
-  }
+
+/* ---- Balance + responsive tuning for graph / stats / Core Stack ---- */
+.github-main .stat-card {
+  padding: 1rem 1.1rem;
+  min-width: 0;
+}
+
+.github-main .stat-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+@media (min-width: 1280px) {
+  .github-main { flex: 1.9; }
+  .github-main .stat-icon svg { width: 36px; height: 36px; }
+}
+
+@media (min-width: 1024px) {
+  /* equal-height columns: graph card grows, stats keep their height */
+  .github-main .calendar-card { flex: 1; }
+  .github-main .stats-column { flex: 0 0 auto; }
+}
+
+@media (max-width: 1023px) {
+  .core-stack-card { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .github-main .stats-column { flex-direction: column; }
+  .github-main .stat-card { min-height: 70px; }
+  .github-main .stat-icon svg { width: 28px; height: 28px; }
 }
