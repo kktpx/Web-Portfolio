@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { Users, BookOpen, Star } from 'lucide-react';
+import CoreStack from '../CoreStack/CoreStack';
 import './GithubSection.css';
 
 const useCountUp = (end, duration = 2000) => {
@@ -95,6 +96,7 @@ const GithubSection = () => {
   return (
     <section className="github-section" id="github-stats">
       <div className="github-container">
+        <div className="github-main">
         {/* Left Side: Contribution Graph Card */}
         <div className="github-card calendar-card">
           <div className="calendar-header">
@@ -206,6 +208,10 @@ const GithubSection = () => {
           )
           }
         </div >
+        </div>
+
+        {/* Right Side: Core Stack */}
+        <CoreStack />
       </div >
     </section >
   );
