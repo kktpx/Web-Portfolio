@@ -72,6 +72,7 @@
 .track-0 .marquee-track { animation-duration: 62s; }
 .track-1 .marquee-track { animation-duration: 70s; }
 .track-2 .marquee-track { animation-duration: 58s; }
+.track-3 .marquee-track { animation-duration: 64s; }
 
 .marquee-track:hover { animation-play-state: paused; }
 

@@ -38,8 +38,9 @@ const skills = [
     { name: "Render", logo: simple("render", "FFFFFF") },
 ];
 
-const ROW_SIZE = 10;
-const skillRows = Array.from({ length: Math.ceil(skills.length / ROW_SIZE) }, (_, i) =>
+const ROW_COUNT = 4;
+const ROW_SIZE = Math.ceil(skills.length / ROW_COUNT);
+const skillRows = Array.from({ length: ROW_COUNT }, (_, i) =>
     skills.slice(i * ROW_SIZE, (i + 1) * ROW_SIZE),
 );
 
