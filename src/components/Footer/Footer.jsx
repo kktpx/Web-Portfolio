@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ResumeButton from '../ResumeButton/ResumeButton';
 import './Footer.css';
 
@@ -56,7 +57,11 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="footer-bottom">
         <div className="footer-copy">© 2026 KTP Portfolio. All rights reserved.</div>
-        <div className="footer-slogan">Crafting code with passion ✦</div>
+        <div className="footer-slogan">
+          <Link to="/privacy" className="footer-privacy">Privacy Policy</Link>
+          <span className="footer-sep">·</span>
+          Crafting code with passion ✦
+        </div>
       </div>
     </footer>
   );
