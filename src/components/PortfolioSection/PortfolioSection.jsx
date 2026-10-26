@@ -1,47 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Section from '../common/Section';
 import { getPublishedProjects } from '../../services/projectService';
 import { trackEvent } from '../../services/analyticsService';
+import ProjectLightbox from './ProjectLightbox';
 import './PortfolioSection.css';
-
-const TiltCard = ({ children, className, 'data-project-id': projectId }) => {
-    const ref = useRef(null);
-    useEffect(() => {
-        const card = ref.current;
-        if (!card || window.matchMedia("(pointer: coarse)").matches) return;
-
-        const handleMouseMove = (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / 20) * -1;
-            const rotateY = (x - centerX) / 20;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-        };
-        const handleMouseLeave = () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        };
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        return () => {
-            card.removeEventListener('mousemove', handleMouseMove);
-            card.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, []);
-    return (
-        <div ref={ref} className={className} data-project-id={projectId} style={{ transition: 'transform 0.1s ease-out' }}>
-            {children}
-        </div>
-    );
-};
 
 const PortfolioSection = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [lightbox, setLightbox] = useState(null);
+    const closeLightbox = useCallback(() => setLightbox(null), []);
 
     useEffect(() => {
         getPublishedProjects()
@@ -121,14 +90,22 @@ const PortfolioSection = () => {
                 {!loading && !error && projects.length > 0 && (
                     <div className="portfolio-grid">
                         {projects.map((project) => (
-                            <TiltCard key={project.id} className="project-card" data-project-id={project.id}>
-                                <div className="project-image">
-                                    {project.image ? (
-                                        <img src={project.image} alt={project.title} />
-                                    ) : (
+                            <article key={project.id} className="project-card" data-project-id={project.id}>
+                                {project.image ? (
+                                    <button
+                                        type="button"
+                                        className="project-image"
+                                        onClick={() => setLightbox(project)}
+                                        aria-label={`View ${project.title} screenshot`}
+                                    >
+                                        <img src={project.image} alt={project.title} loading="lazy" />
+                                        <span className="project-image-badge">⤢ View</span>
+                                    </button>
+                                ) : (
+                                    <div className="project-image">
                                         <div className="image-placeholder"></div>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                                 <div className="project-content">
                                     <h3 className="project-title">{project.title}</h3>
                                     <p className="project-description">{project.description}</p>
@@ -152,11 +129,12 @@ const PortfolioSection = () => {
                                         )}
                                     </div>
                                 </div>
-                            </TiltCard>
+                            </article>
                         ))}
                     </div>
                 )}
             </div>
+            <ProjectLightbox project={lightbox} onClose={closeLightbox} />
         </Section>
     );
 };
