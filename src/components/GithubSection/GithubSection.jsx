@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { Activity, Rocket, BookOpen } from 'lucide-react';
 import CoreStack from '../CoreStack/CoreStack';
@@ -63,6 +63,27 @@ const GithubSection = () => {
   const [projectCount, setProjectCount] = useState(0);
   const [yearContributions, setYearContributions] = useState(0);
   const [recentContributions, setRecentContributions] = useState(0);
+  const calendarRef = useRef(null);
+
+  // On narrow screens the heatmap scrolls sideways; start at the newest week.
+  useEffect(() => {
+    const el = calendarRef.current;
+    if (!el) return;
+    const scrollToEnd = () => {
+      // react-activity-calendar renders its own horizontal scroller
+      const scroller = el.querySelector('.react-activity-calendar__scroll-container');
+      if (!scroller || scroller.scrollWidth <= scroller.clientWidth) return false;
+      scroller.scrollLeft = scroller.scrollWidth;
+      return true;
+    };
+    if (scrollToEnd()) return;
+    // The calendar fetches its data, so wait for it to render
+    const observer = new MutationObserver(() => {
+      if (scrollToEnd()) observer.disconnect();
+    });
+    observer.observe(el, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     fetch("https://api.github.com/users/" + username)
@@ -174,7 +195,7 @@ const GithubSection = () => {
                 </div>
               </div>
 
-              <div className="calendar-wrapper">
+              <div className="calendar-wrapper" ref={calendarRef}>
                 <GitHubCalendar
                   username={username}
                   colorScheme="dark"
