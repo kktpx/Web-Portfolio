@@ -1,38 +1,66 @@
 ﻿import React from 'react';
 import Section from '../common/Section';
 import './SkillsSection.css';
-import { Database, FileJson, Sparkles, Cloud, Triangle, Workflow } from 'lucide-react';
+import { FileJson } from 'lucide-react';
 
-const allSkills = [
-    { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
-    { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
-    { name: "JAVASCRIPT", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
-    { name: "TYPESCRIPT", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-    { name: "REACT", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-    { name: "NEXT.JS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
-    { name: "VITE", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
-    { name: "TAILWIND CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-    { name: "NODE.JS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-    { name: "PYTHON", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-    { name: "FLASK", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" },
-    { name: "PRISMA", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
-    { name: "SQLITE", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" },
-    { name: "SQL", icon: Database, color: "#fff" },
-    { name: "REST API", icon: FileJson, color: "#fff" },
-    { name: "GOOGLE GEMINI", icon: Sparkles, color: "#8E24AA" },
-    { name: "SCIKIT-LEARN", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" },
-    { name: "NUMPY", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
-    { name: "GITHUB ACTIONS", icon: Workflow, color: "#2088FF" },
-    { name: "VERCEL", icon: Triangle, color: "#fff", fill: "#fff" },
-    { name: "RENDER", icon: Cloud, color: "#fff", fill: "#fff" },
-    { name: "GIT", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+const dev = (slug) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}/${slug}-original.svg`;
+const simple = (slug, hex) => `https://cdn.simpleicons.org/${slug}/${hex}`;
+
+const skillGroups = [
+    {
+        title: "Languages & Frontend",
+        skills: [
+            { name: "HTML5", logo: dev("html5") },
+            { name: "CSS3", logo: dev("css3") },
+            { name: "JAVASCRIPT", logo: dev("javascript") },
+            { name: "TYPESCRIPT", logo: dev("typescript") },
+            { name: "REACT", logo: dev("react") },
+            { name: "VUE.JS", logo: dev("vuejs") },
+            { name: "VITE", logo: dev("vitejs") },
+            { name: "TAILWIND CSS", logo: dev("tailwindcss") },
+            { name: "GSAP", logo: simple("greensock", "88CE02") },
+        ],
+    },
+    {
+        title: "Mobile Development",
+        skills: [
+            { name: "REACT NATIVE", logo: dev("react") },
+            { name: "EXPO", logo: simple("expo", "FFFFFF") },
+        ],
+    },
+    {
+        title: "Backend & Database",
+        skills: [
+            { name: "PYTHON", logo: dev("python") },
+            { name: "FASTAPI", logo: dev("fastapi") },
+            { name: "SUPABASE", logo: dev("supabase") },
+            { name: "POSTGRESQL", logo: dev("postgresql") },
+            { name: "REST API", icon: FileJson, color: "#fff" },
+        ],
+    },
+    {
+        title: "AI, Testing & Tools",
+        skills: [
+            { name: "GOOGLE GEMINI", logo: simple("googlegemini", "8E75B2") },
+            { name: "SCIKIT-LEARN", logo: dev("scikitlearn") },
+            { name: "JEST", logo: simple("jest", "C21325") },
+            { name: "VITEST", logo: dev("vitest") },
+            { name: "PYTEST", logo: dev("pytest") },
+            { name: "NODE.JS", logo: dev("nodejs") },
+            { name: "GIT", logo: dev("git") },
+            { name: "GITHUB ACTIONS", logo: dev("githubactions") },
+            { name: "VERCEL", logo: simple("vercel", "FFFFFF") },
+            { name: "RENDER", logo: simple("render", "FFFFFF") },
+        ],
+    },
 ];
 
-const row1 = allSkills.slice(0, 6);
-const row2 = allSkills.slice(6, 12);
-const row3 = allSkills.slice(12, 17);
-const row4 = allSkills.slice(17, 22);
-const skillRows = [row1, row2, row3, row4];
+// Repeat short groups so a marquee set is always wide enough to loop without gaps.
+const MIN_PER_SET = 8;
+const fillRow = (skills) => {
+    const times = Math.max(1, Math.ceil(MIN_PER_SET / skills.length));
+    return Array.from({ length: times }, () => skills).flat();
+};
 
 const SkillsSection = () => {
     return (
@@ -41,31 +69,35 @@ const SkillsSection = () => {
                 <h2 className="skills-title">Core <span className="highlight-yellow">Stack</span></h2>
             </div>
             <div className="marquee-container">
-                {skillRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className={`marquee-track-container track-${rowIndex}`}>
-                        <div className={`marquee-track direction-${rowIndex % 2 === 0 ? 'left' : 'right'}`}>
-                            {[...Array(6)].map((_, setIndex) => (
-                                <div key={setIndex} className="marquee-set">
-                                    {row.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            {skill.logo ? (
-                                                <img src={skill.logo} alt={skill.name} className="skill-logo" />
-                                            ) : skill.icon ? (
-                                                <skill.icon size={18} className="skill-icon" color={skill.color || "currentColor"} fill={skill.fill || "none"} />
-                                            ) : null}
-                                            <span className="skill-name">{skill.name}</span>
+                {skillGroups.map((group, rowIndex) => {
+                    const row = fillRow(group.skills);
+                    return (
+                        <div key={group.title} className="skill-group">
+                            <h3 className="skill-group-title">{group.title}</h3>
+                            <div className={`marquee-track-container track-${rowIndex}`}>
+                                <div className={`marquee-track direction-${rowIndex % 2 === 0 ? 'left' : 'right'}`}>
+                                    {[...Array(6)].map((_, setIndex) => (
+                                        <div key={setIndex} className="marquee-set">
+                                            {row.map((skill, index) => (
+                                                <div key={index} className="skill-item">
+                                                    {skill.logo ? (
+                                                        <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                                                    ) : skill.icon ? (
+                                                        <skill.icon size={18} className="skill-icon" color={skill.color || "currentColor"} fill={skill.fill || "none"} />
+                                                    ) : null}
+                                                    <span className="skill-name">{skill.name}</span>
+                                                </div>
+                                            ))}
                                         </div>
                                     ))}
                                 </div>
-                            ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </Section>
     );
 };
 
 export default SkillsSection;
-
-
