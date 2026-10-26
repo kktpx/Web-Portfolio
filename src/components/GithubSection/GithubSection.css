@@ -206,10 +206,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-  background-size: 15px 15px;
-  opacity: 0.4;
-  z-index: 1;
+  display: none; /* dotted pattern removed */
 }
 
 .stat-card:hover {

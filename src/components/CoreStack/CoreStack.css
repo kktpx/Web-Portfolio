@@ -2,8 +2,6 @@
 .core-stack-card {
     position: relative;
     background-color: rgba(20, 20, 20, 0.4);
-    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-    background-size: 14px 14px;
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid #222;
