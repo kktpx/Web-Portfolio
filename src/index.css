@@ -24,6 +24,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px; /* keep anchored headings clear of the fixed navbar */
 }
 
 /* Respect users who prefer reduced motion */
