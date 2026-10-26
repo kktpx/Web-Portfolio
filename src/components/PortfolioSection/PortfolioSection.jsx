@@ -89,12 +89,8 @@ const PortfolioSection = () => {
 
                 {!loading && !error && projects.length > 0 && (
                     <div className="portfolio-grid">
-                        {projects.map((project, index) => (
-                            <article
-                                key={project.id}
-                                className={`project-card${index === 0 ? ' project-card--featured' : ''}`}
-                                data-project-id={project.id}
-                            >
+                        {projects.map((project) => (
+                            <article key={project.id} className="project-card" data-project-id={project.id}>
                                 {project.image ? (
                                     <button
                                         type="button"

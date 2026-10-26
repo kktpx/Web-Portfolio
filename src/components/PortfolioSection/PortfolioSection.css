@@ -26,7 +26,7 @@
     margin: 0 auto;
 }
 
-/* Bento: featured card on its own row, rest in 3 columns (orphans centered) */
+/* Uniform grid: 3 columns, orphan cards in the last row centered */
 .portfolio-grid {
     --grid-gap: 1.25rem;
     --grid-cols: 3;
@@ -228,45 +228,6 @@ button.project-image:focus-visible .project-image-badge {
     border-color: #ffcc00;
 }
 
-/* Featured card: horizontal, image left / content right */
-.project-card--featured {
-    flex-basis: 100%;
-    flex-direction: row;
-}
-
-.project-card--featured .project-image {
-    flex: 0 0 58%;
-    width: 58%;
-    border-bottom: none;
-    border-right: 1px solid var(--glass-border);
-}
-
-.project-card--featured .project-content {
-    justify-content: center;
-    padding: 1.75rem 2rem;
-}
-
-.project-card--featured .project-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.6rem;
-}
-
-.project-card--featured .project-description {
-    font-size: 0.925rem;
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
-}
-
-.project-card--featured .project-buttons {
-    margin-top: 0;
-    padding-top: 1.25rem;
-}
-
-.project-card--featured .btn {
-    flex: 0 0 auto;
-    padding: 0.55rem 1.6rem;
-}
-
 /* Lightbox */
 .lightbox {
     position: fixed;
@@ -369,54 +330,16 @@ button.project-image:focus-visible .project-image-badge {
     }
 }
 
-/* Tablet: 2 columns, featured still horizontal */
+/* Tablet: 2 columns */
 @media (max-width: 1024px) {
     .portfolio-grid {
         --grid-cols: 2;
     }
-
-    .project-card--featured .project-image {
-        flex-basis: 52%;
-        width: 52%;
-    }
-
-    .project-card--featured .project-content {
-        padding: 1.25rem 1.5rem;
-    }
-
-    .project-card--featured .project-description {
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-    }
 }
 
-/* Small tablet / large phone: featured stacks vertically */
 @media (max-width: 768px) {
     .portfolio-header {
         margin-bottom: 2rem;
-    }
-
-    .project-card--featured {
-        flex-direction: column;
-    }
-
-    .project-card--featured .project-image {
-        flex-basis: auto;
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--glass-border);
-    }
-
-    .project-card--featured .project-content {
-        padding: 1.1rem 1.25rem 1.25rem;
-    }
-
-    .project-card--featured .project-title {
-        font-size: 1.2rem;
-    }
-
-    .project-card--featured .btn {
-        flex: 1;
     }
 
     .lightbox {
@@ -442,8 +365,7 @@ button.project-image:focus-visible .project-image-badge {
     .project-card {
         border-radius: 16px;
     }
-    .project-content,
-    .project-card--featured .project-content {
+    .project-content {
         padding: 1rem 1.1rem 1.1rem;
     }
     .lightbox-close {
