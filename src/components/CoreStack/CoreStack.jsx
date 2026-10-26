@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileJson } from 'lucide-react';
+import { FileJson, CodeXml } from 'lucide-react';
 import './CoreStack.css';
 
 const dev = (slug) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}/${slug}-original.svg`;
@@ -8,37 +8,37 @@ const simple = (slug, hex) => `https://cdn.simpleicons.org/${slug}/${hex}`;
 const skills = [
     { name: "HTML5", logo: dev("html5") },
     { name: "CSS3", logo: dev("css3") },
-    { name: "JAVASCRIPT", logo: dev("javascript") },
-    { name: "TYPESCRIPT", logo: dev("typescript") },
-    { name: "REACT", logo: dev("react") },
-    { name: "VUE.JS", logo: dev("vuejs") },
-    { name: "NEXT.JS", logo: simple("nextdotjs", "FFFFFF") },
-    { name: "VITE", logo: dev("vitejs") },
-    { name: "TAILWIND CSS", logo: dev("tailwindcss") },
+    { name: "JavaScript", logo: dev("javascript") },
+    { name: "TypeScript", logo: dev("typescript") },
+    { name: "React", logo: dev("react") },
+    { name: "Vue.js", logo: dev("vuejs") },
+    { name: "Next.js", logo: simple("nextdotjs", "FFFFFF") },
+    { name: "Vite", logo: dev("vitejs") },
+    { name: "Tailwind CSS", logo: dev("tailwindcss") },
     { name: "GSAP", logo: simple("greensock", "88CE02") },
-    { name: "REACT NATIVE", logo: dev("react") },
-    { name: "EXPO", logo: simple("expo", "FFFFFF") },
-    { name: "PYTHON", logo: dev("python") },
-    { name: "FASTAPI", logo: dev("fastapi") },
-    { name: "FLASK", logo: simple("flask", "FFFFFF") },
-    { name: "PRISMA", logo: simple("prisma", "FFFFFF") },
-    { name: "SUPABASE", logo: dev("supabase") },
-    { name: "POSTGRESQL", logo: dev("postgresql") },
-    { name: "SQLITE", logo: dev("sqlite") },
+    { name: "React Native", logo: dev("react") },
+    { name: "Expo", logo: simple("expo", "FFFFFF") },
+    { name: "Python", logo: dev("python") },
+    { name: "FastAPI", logo: dev("fastapi") },
+    { name: "Flask", logo: simple("flask", "FFFFFF") },
+    { name: "Prisma", logo: simple("prisma", "FFFFFF") },
+    { name: "Supabase", logo: dev("supabase") },
+    { name: "PostgreSQL", logo: dev("postgresql") },
+    { name: "SQLite", logo: dev("sqlite") },
     { name: "REST API", icon: FileJson, color: "#fff" },
-    { name: "GOOGLE GEMINI", logo: simple("googlegemini", "8E75B2") },
-    { name: "SCIKIT-LEARN", logo: dev("scikitlearn") },
-    { name: "JEST", logo: simple("jest", "C21325") },
-    { name: "VITEST", logo: dev("vitest") },
-    { name: "PYTEST", logo: dev("pytest") },
-    { name: "NODE.JS", logo: dev("nodejs") },
-    { name: "GIT", logo: dev("git") },
-    { name: "GITHUB ACTIONS", logo: dev("githubactions") },
-    { name: "VERCEL", logo: simple("vercel", "FFFFFF") },
-    { name: "RENDER", logo: simple("render", "FFFFFF") },
+    { name: "Google Gemini", logo: simple("googlegemini", "8E75B2") },
+    { name: "scikit-learn", logo: dev("scikitlearn") },
+    { name: "Jest", logo: simple("jest", "C21325") },
+    { name: "Vitest", logo: dev("vitest") },
+    { name: "Pytest", logo: dev("pytest") },
+    { name: "Node.js", logo: dev("nodejs") },
+    { name: "Git", logo: dev("git") },
+    { name: "GitHub Actions", logo: dev("githubactions") },
+    { name: "Vercel", logo: simple("vercel", "FFFFFF") },
+    { name: "Render", logo: simple("render", "FFFFFF") },
 ];
 
-const ROW_SIZE = 5;
+const ROW_SIZE = 10;
 const skillRows = Array.from({ length: Math.ceil(skills.length / ROW_SIZE) }, (_, i) =>
     skills.slice(i * ROW_SIZE, (i + 1) * ROW_SIZE),
 );
@@ -47,6 +47,7 @@ const skillRows = Array.from({ length: Math.ceil(skills.length / ROW_SIZE) }, (_
 const CoreStack = () => (
     <div id="skills" className="core-stack-card">
         <div className="skills-header">
+            <CodeXml size={26} className="skills-title-icon" />
             <h2 className="skills-title">Core <span className="highlight-yellow">Stack</span></h2>
         </div>
         <div className="marquee-container">
