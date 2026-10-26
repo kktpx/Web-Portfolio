@@ -6,7 +6,7 @@
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid #222;
     padding: 1.5rem 0;
-    border-radius: 24px;
+    border-radius: 12px; /* matches the contribution graph and stat cards */
     width: 100%;
     min-width: 0;
     overflow: hidden;
@@ -14,33 +14,41 @@
     flex-direction: column;
 }
 
+/* Header mirrors the contribution graph card (icon bubble + title + subtitle) */
 .skills-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0 1.75rem;
+    gap: 1rem;
+    padding: 0 1.5rem;
     margin-bottom: 1.25rem;
+}
+
+.skills-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: #1a1a1c;
+    flex-shrink: 0;
 }
 
 .skills-title-icon {
     color: #ffcc00;
-    flex-shrink: 0;
 }
 
 .skills-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #ffffff;
     margin: 0;
-    letter-spacing: 0.01em;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #ffffff;
 }
 
-.highlight-yellow {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
+.skills-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #888;
 }
 
 .marquee-container {
@@ -51,14 +59,14 @@
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    gap: 0.9rem;
+    gap: 0.75rem;
 }
 
 .marquee-track-container {
     width: 100%;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
 }
 
 .marquee-track {
@@ -73,6 +81,7 @@
 .track-1 .marquee-track { animation-duration: 70s; }
 .track-2 .marquee-track { animation-duration: 58s; }
 .track-3 .marquee-track { animation-duration: 64s; }
+.track-4 .marquee-track { animation-duration: 68s; }
 
 .marquee-track:hover { animation-play-state: paused; }
 
@@ -97,10 +106,10 @@
     align-items: center;
     gap: 0.6rem;
     background: rgba(255, 255, 255, 0.04);
-    padding: 0.55rem 1rem;
-    border-radius: 10px;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
     border: 1px solid #2a2a2a;
-    cursor: pointer;
+    cursor: default;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
@@ -130,16 +139,15 @@
 .skill-item:hover .skill-icon { transform: scale(1.1); }
 
 .skill-name {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: #d4d4d4;
-    font-weight: 600;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .skill-item:hover .skill-name { color: #ffffff; }
 
 @media (max-width: 768px) {
-    .core-stack-card { border-radius: 20px; }
     .skills-header { padding: 0 1.25rem; }
 }
 
@@ -147,5 +155,15 @@
     .core-stack-card { padding: 1.25rem 0; }
     .skill-item { padding: 0.45rem 0.8rem; gap: 0.5rem; }
     .skill-name { font-size: 0.8rem; }
-    .skills-title { font-size: 1.35rem; }
+}
+
+/* Reduced motion: stop the marquee and let each row scroll by hand */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none !important; }
+    .marquee-track-container {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .marquee-track-container::-webkit-scrollbar { display: none; }
+    .skill-item, .skill-logo, .skill-icon { transition: none; }
 }
