@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import HeroSection from '../components/HeroSection/HeroSection'
 import AboutSection from '../components/AboutSection/AboutSection'
-import SkillsSection from '../components/SkillsSection/SkillsSection'
 import PortfolioSection from '../components/PortfolioSection/PortfolioSection'
 import ContactSection from '../components/ContactSection/ContactSection'
 import GithubSection from '../components/GithubSection/GithubSection'
@@ -34,7 +33,6 @@ function HomePage() {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <SkillsSection />
       <GithubSection />
       <PortfolioSection />
       <ContactSection />
