@@ -129,14 +129,31 @@ button.project-image:focus-visible .project-image-badge {
     margin: 0 0 0.4rem 0;
 }
 
+.project-title-btn {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.project-title-btn:hover,
+.project-title-btn:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    outline: none;
+}
+
 .project-description {
     font-size: 0.875rem;
     color: #a0a0a0;
     line-height: 1.6;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -206,8 +223,33 @@ button.project-image:focus-visible .project-image-badge {
     outline: none;
 }
 
-/* Lightbox */
-.lightbox {
+/* Text-style button that opens the details modal */
+.btn-details {
+    margin-left: auto;
+    border-color: transparent;
+    padding-right: 0.25rem;
+    color: #a0a0a0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.btn-details svg {
+    transition: transform 0.25s ease;
+}
+
+.btn-details:hover,
+.btn-details:focus-visible {
+    color: #ffcc00;
+    outline: none;
+}
+
+.btn-details:hover svg,
+.btn-details:focus-visible svg {
+    transform: translateX(3px);
+}
+
+/* Project details modal */
+.pm-backdrop {
     position: fixed;
     inset: 0;
     z-index: 2000; /* above navbar (1000) and scroll-to-top, below page loader */
@@ -215,73 +257,109 @@ button.project-image:focus-visible .project-image-badge {
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    cursor: zoom-out;
-    animation: lightbox-fade 0.25s ease;
+    animation: pm-fade 0.25s ease;
 }
 
-.lightbox-figure {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9rem;
-    cursor: default;
-    animation: lightbox-zoom 0.3s ease;
-}
-
-.lightbox-figure img {
-    max-width: 92vw;
-    max-height: 82vh;
-    object-fit: contain;
-    border-radius: 12px;
+.pm-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 880px;
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    animation: pm-rise 0.3s ease;
 }
 
-.lightbox-figure figcaption {
-    color: #ffcc00;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.lightbox-close {
+.pm-close {
     position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    width: 44px;
-    height: 44px;
+    top: 0.85rem;
+    right: 0.85rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     color: #fff;
-    font-size: 1.6rem;
-    line-height: 1;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.lightbox-close:hover,
-.lightbox-close:focus-visible {
+.pm-close:hover,
+.pm-close:focus-visible {
     border-color: #ffcc00;
     color: #ffcc00;
     outline: none;
 }
 
-@keyframes lightbox-fade {
+.pm-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #0b0b0b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.pm-body {
+    padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.pm-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffcc00;
+}
+
+.pm-description {
+    margin: 0;
+    font-size: 0.975rem;
+    line-height: 1.75;
+    color: #c4c4c4;
+    white-space: pre-line;
+}
+
+.pm-tech {
+    margin-top: 1.25rem;
+}
+
+.pm-buttons {
+    margin-top: 1.5rem;
+    padding-top: 0;
+}
+
+@keyframes pm-fade {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes lightbox-zoom {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes pm-rise {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .lightbox,
-    .lightbox-figure {
+    .pm-backdrop,
+    .pm-dialog {
         animation: none;
     }
     .project-card,
@@ -316,18 +394,25 @@ button.project-image:focus-visible .project-image-badge {
 }
 
 @media (max-width: 768px) {
-    .portfolio-header {
-        margin-bottom: 2rem;
+    .pm-backdrop {
+        padding: 0.75rem;
     }
 
-    .lightbox {
-        padding: 1rem;
+    .pm-dialog {
+        max-height: calc(100dvh - 1.5rem);
+        border-radius: 16px;
     }
 
-    .lightbox-figure img {
-        max-width: 100%;
-        max-height: 75vh;
-        border-radius: 8px;
+    .pm-body {
+        padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .pm-title {
+        font-size: 1.3rem;
+    }
+
+    .pm-description {
+        font-size: 0.925rem;
     }
 }
 
@@ -345,12 +430,6 @@ button.project-image:focus-visible .project-image-badge {
     }
     .project-content {
         padding: 1rem 1.1rem 1.1rem;
-    }
-    .lightbox-close {
-        top: 0.75rem;
-        right: 0.75rem;
-        width: 40px;
-        height: 40px;
     }
 }
 
