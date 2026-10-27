@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import Section from '../common/Section';
 import SectionHeading from '../common/SectionHeading';
 import { GithubIcon } from '../common/BrandIcons';
 import { getPublishedProjects } from '../../services/projectService';
 import { trackEvent } from '../../services/analyticsService';
-import ProjectLightbox from './ProjectLightbox';
+import ProjectModal from './ProjectModal';
 import './PortfolioSection.css';
 
 const PortfolioSection = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [lightbox, setLightbox] = useState(null);
-    const closeLightbox = useCallback(() => setLightbox(null), []);
+    const [selected, setSelected] = useState(null);
+    const closeDetails = useCallback(() => setSelected(null), []);
 
     useEffect(() => {
         getPublishedProjects()
@@ -95,11 +95,11 @@ const PortfolioSection = () => {
                                     <button
                                         type="button"
                                         className="project-image"
-                                        onClick={() => setLightbox(project)}
-                                        aria-label={`View ${project.title} screenshot`}
+                                        onClick={() => setSelected(project)}
+                                        aria-label={`View ${project.title} details`}
                                     >
                                         <img src={project.image} alt={project.title} loading="lazy" />
-                                        <span className="project-image-badge">⤢ View</span>
+                                        <span className="project-image-badge">⤢ Details</span>
                                     </button>
                                 ) : (
                                     <div className="project-image">
@@ -107,7 +107,11 @@ const PortfolioSection = () => {
                                     </div>
                                 )}
                                 <div className="project-content">
-                                    <h3 className="project-title">{project.title}</h3>
+                                    <h3 className="project-title">
+                                        <button type="button" className="project-title-btn" onClick={() => setSelected(project)}>
+                                            {project.title}
+                                        </button>
+                                    </h3>
                                     <p className="project-description">{project.description}</p>
                                     {project.tech && project.tech.length > 0 && (
                                         <div className="project-tech">
@@ -129,6 +133,15 @@ const PortfolioSection = () => {
                                                 GitHub
                                             </a>
                                         )}
+                                        <button
+                                            type="button"
+                                            className="btn btn-details"
+                                            onClick={() => setSelected(project)}
+                                            aria-label={`More about ${project.title}`}
+                                        >
+                                            Details
+                                            <ArrowRight size={15} aria-hidden="true" />
+                                        </button>
                                     </div>
                                 </div>
                             </article>
@@ -136,7 +149,7 @@ const PortfolioSection = () => {
                     </div>
                 )}
             </div>
-            <ProjectLightbox project={lightbox} onClose={closeLightbox} />
+            <ProjectModal project={selected} onClose={closeDetails} />
         </Section>
     );
 };
