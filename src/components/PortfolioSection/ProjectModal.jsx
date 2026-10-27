@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowUpRight, Maximize2, X } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import { GithubIcon } from '../common/BrandIcons';
 import { trackEvent } from '../../services/analyticsService';
 
@@ -50,15 +50,6 @@ const ProjectModal = ({ project, onClose }) => {
                 {project.image && (
                     <div className="pm-media">
                         <img src={project.image} alt={`${project.title} screenshot`} />
-                        <a
-                            href={project.image}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="pm-fullsize"
-                        >
-                            <Maximize2 size={14} aria-hidden="true" />
-                            Full size
-                        </a>
                     </div>
                 )}
 
