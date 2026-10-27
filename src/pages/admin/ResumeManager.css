@@ -1,0 +1,223 @@
+.resume-downloads {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  color: var(--admin-text-muted);
+  font-size: 0.85rem;
+}
+
+.resume-downloads-value {
+  color: var(--admin-accent);
+  font-weight: 600;
+}
+
+.resume-setup {
+  margin-bottom: 1.5rem;
+  border-color: rgba(255, 204, 0, 0.35);
+  color: var(--admin-text-muted);
+  line-height: 1.6;
+}
+
+.resume-setup strong {
+  color: var(--admin-accent);
+}
+
+.resume-setup code {
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--admin-text);
+  font-size: 0.85em;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.resume-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.resume-card--dragging {
+  border-color: var(--admin-accent);
+  background: rgba(255, 204, 0, 0.05);
+}
+
+.resume-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.resume-card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.resume-status {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.resume-status--custom {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--admin-success);
+}
+
+.resume-file {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--admin-border);
+}
+
+.resume-file-icon {
+  flex-shrink: 0;
+  color: var(--admin-accent);
+}
+
+.resume-file-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.resume-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--admin-text);
+  font-weight: 500;
+}
+
+.resume-file-sub {
+  color: var(--admin-text-muted);
+  font-size: 0.8rem;
+}
+
+.resume-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 120px;
+  padding: 1.25rem;
+  border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--admin-text-muted);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.resume-dropzone strong {
+  color: var(--admin-text);
+}
+
+.resume-dropzone:hover:not(:disabled),
+.resume-dropzone:focus-visible {
+  border-color: var(--admin-accent);
+  color: var(--admin-accent);
+  background: rgba(255, 204, 0, 0.04);
+  outline: none;
+}
+
+.resume-dropzone:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.resume-dropzone-hint {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.resume-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.resume-actions .admin-btn {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.resume-confirm {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.resume-confirm p {
+  margin: 0 0 0.75rem;
+  color: var(--admin-text);
+  font-size: 0.9rem;
+}
+
+.resume-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.resume-confirm-actions .admin-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.resume-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--admin-text-muted);
+}
+
+.resume-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 204, 0, 0.2);
+  border-top-color: var(--admin-accent);
+  border-radius: 50%;
+  animation: resume-spin 0.8s linear infinite;
+}
+
+@keyframes resume-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-page-header:has(.resume-downloads) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

@@ -6,6 +6,7 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PortfolioManager from './pages/admin/PortfolioManager'
 import ComingSoon from './pages/admin/ComingSoon'
+import ResumeManager from './pages/admin/ResumeManager'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import AdminLayout from './components/admin/AdminLayout'
 import './App.css'
@@ -32,7 +33,7 @@ function App() {
         <Route path="portfolio" element={<Navigate to="/admin/projects" replace />} />
         <Route path="profile" element={<ComingSoon title="Profile" />} />
         <Route path="contact" element={<ComingSoon title="Contact" />} />
-        <Route path="resume" element={<ComingSoon title="Resume" />} />
+        <Route path="resume" element={<ResumeManager />} />
       </Route>
     </Routes>
   )

@@ -1,10 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { trackEvent } from '../../services/analyticsService';
+import { getResumeUrls, DEFAULT_RESUME_URLS, RESUME_LANGS } from '../../services/resumeService';
 import './ResumeButton.css';
 
 const ResumeButton = ({ variant = 'default' }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [urls, setUrls] = useState(DEFAULT_RESUME_URLS);
   const dropdownRef = useRef(null);
+
+  // Uploaded resumes (admin) override the bundled defaults
+  useEffect(() => {
+    let active = true;
+    getResumeUrls().then((next) => { if (active) setUrls(next); });
+    return () => { active = false; };
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -30,12 +39,11 @@ const ResumeButton = ({ variant = 'default' }) => {
       
       {isOpen && (
         <div className="resume-dropdown">
-          <a href="/resume/resume-th.pdf" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('resume_download')}>
-            🇹🇭 ภาษาไทย (TH)
-          </a>
-          <a href="/resume/resume-en.pdf" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('resume_download')}>
-            🇺🇸 English (ENG)
-          </a>
+          {RESUME_LANGS.map(({ code, label, flag }) => (
+            <a key={code} href={urls[code]} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('resume_download')}>
+              {flag} {label}
+            </a>
+          ))}
         </div>
       )}
     </div>
